@@ -56,21 +56,29 @@ export function PreviewShell({
   const [viewport, setViewport] = React.useState<ViewportSize>("wide")
   const [useIframe, setUseIframe] = React.useState(false)
 
+  React.useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)")
+    const apply = () => setViewport(mq.matches ? "mobile" : "wide")
+    apply()
+    mq.addEventListener("change", apply)
+    return () => mq.removeEventListener("change", apply)
+  }, [])
+
   const page = getDemoPage(pageId)
   const iframeSrc = `${page.path}?embedded=1`
   const frameWidth = viewportConfig[viewport].width
   const isConstrained = viewport !== "wide"
 
   return (
-    <div className="showcase-page flex min-h-screen flex-col [--showcase-bar-height:3.25rem]">
+    <div className="showcase-page flex min-h-screen min-w-0 flex-col [--showcase-bar-height:3.25rem]">
       <ThemePresetEffect
         {...(initialTheme !== undefined ? { themeId: initialTheme } : {})}
       />
-      <ShowcaseTopBar
-        active="preview"
-        badge="Live preview"
-        trailing={
-          <div className="flex flex-wrap items-center gap-2">
+      <ShowcaseTopBar active="preview" badge="Live preview" />
+
+      <div className="border-b bg-muted/30">
+        <div className="mx-auto flex max-w-[100rem] min-w-0 flex-col gap-3 px-4 py-2.5 sm:px-6">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
             <ToggleGroup
               type="single"
               value={viewport}
@@ -79,6 +87,7 @@ export function PreviewShell({
               }}
               variant="outline"
               size="sm"
+              className="w-full min-w-0 sm:w-auto"
             >
               {(Object.keys(viewportConfig) as ViewportSize[]).map((key) => {
                 const { label, icon: Icon } = viewportConfig[key]
@@ -88,6 +97,7 @@ export function PreviewShell({
                     value={key}
                     aria-label={`${label} viewport`}
                     title={label}
+                    className="min-h-11 min-w-11 flex-1 sm:flex-none"
                   >
                     <Icon className="size-4" />
                     <span className="sr-only">{label}</span>
@@ -95,43 +105,41 @@ export function PreviewShell({
                 )
               })}
             </ToggleGroup>
-            <Button
-              variant={useIframe ? "default" : "outline"}
-              size="sm"
-              onClick={() => setUseIframe((prev) => !prev)}
-            >
-              {useIframe ? "Inline" : "Iframe"}
-            </Button>
-            <Button variant="outline" size="sm" asChild>
-              <Link href={page.path} target="_blank" aria-label="Open page in new tab">
-                <ExternalLinkIcon className="size-4" />
-                <span className="hidden sm:inline">Open page</span>
-              </Link>
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant={useIframe ? "default" : "outline"}
+                size="sm"
+                className="min-h-11 flex-1 sm:flex-none"
+                onClick={() => setUseIframe((prev) => !prev)}
+              >
+                {useIframe ? "Inline" : "Iframe"}
+              </Button>
+              <Button variant="outline" size="sm" className="min-h-11 flex-1 sm:flex-none" asChild>
+                <Link href={page.path} target="_blank" aria-label="Open page in new tab">
+                  <ExternalLinkIcon className="size-4" />
+                  <span className="hidden sm:inline">Open page</span>
+                </Link>
+              </Button>
+            </div>
           </div>
-        }
-      />
 
-      <div className="border-b bg-muted/30">
-        <div className="mx-auto flex max-w-[100rem] flex-col gap-3 px-4 py-2.5 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
           <Tabs
             value={pageId}
             onValueChange={(value) => setPageId(value as DemoPageId)}
             className="min-w-0"
           >
-            <TabsList className="h-auto max-w-full flex-wrap justify-start gap-1 overflow-x-auto bg-transparent p-0">
+            <TabsList className="hidden h-auto w-full max-w-full flex-wrap justify-start gap-1.5 bg-transparent p-0 sm:flex">
               {demoPages.map((item) => (
                 <TabsTrigger
                   key={item.id}
                   value={item.id}
-                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  className="min-h-11 shrink-0 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
-                  <item.icon className="mr-1.5 size-3.5" />
+                  <item.icon className="mr-1.5 size-3.5 shrink-0" />
                   {item.label}
                 </TabsTrigger>
               ))}
             </TabsList>
-            {/* Hidden panels so tab triggers have valid aria-controls targets */}
             {demoPages.map((item) => (
               <TabsContent
                 key={item.id}
@@ -144,12 +152,12 @@ export function PreviewShell({
             ))}
           </Tabs>
 
-          <div className="hidden w-64 shrink-0 lg:block">
+          <div className="sm:hidden">
             <Select
               value={pageId}
               onValueChange={(value) => setPageId(value as DemoPageId)}
             >
-              <SelectTrigger aria-label="Select demo page">
+              <SelectTrigger className="min-h-11 w-full" aria-label="Select demo page">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -164,18 +172,18 @@ export function PreviewShell({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col items-center bg-muted/40 p-4 sm:p-6">
-        <div className="mb-4 w-full max-w-[100rem] text-center sm:text-left">
+      <div className="flex min-w-0 flex-1 flex-col items-center bg-muted/40 p-3 sm:p-6">
+        <div className="mb-4 w-full max-w-[100rem] min-w-0 text-center sm:text-left">
           <h1 className="font-heading text-lg font-semibold">{page.label}</h1>
           <p className="text-sm text-muted-foreground">{page.description}</p>
         </div>
 
         <div
           className={cn(
-            "relative w-full transition-[max-width] duration-300 ease-out",
+            "relative w-full min-w-0 transition-[max-width] duration-300 ease-out",
             isConstrained && "mx-auto"
           )}
-          style={{ maxWidth: frameWidth }}
+          style={isConstrained ? { width: "100%", maxWidth: frameWidth } : undefined}
         >
           <div
             className={cn(
@@ -197,7 +205,7 @@ export function PreviewShell({
 
             <div
               className={cn(
-                "relative bg-background",
+                "relative min-w-0 bg-background",
                 useIframe
                   ? "h-[min(80vh,720px)]"
                   : "max-h-[80vh] overflow-x-hidden overflow-y-auto"

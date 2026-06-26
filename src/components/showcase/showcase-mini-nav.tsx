@@ -34,7 +34,7 @@ export function ShowcaseMiniNav({
       )}
       aria-label="Section navigation"
     >
-      <div className="mx-auto flex max-w-[100rem] gap-1 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mx-auto flex max-w-[100rem] min-w-0 gap-1 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
           const active = item.id === activeId
           return (
@@ -44,7 +44,7 @@ export function ShowcaseMiniNav({
               data-nav-id={item.id}
               onClick={() => onSelect(item.id)}
               className={cn(
-                "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all",
+                "min-h-11 shrink-0 rounded-full px-3.5 py-2 text-xs font-medium transition-all",
                 active
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"

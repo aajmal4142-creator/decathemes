@@ -95,7 +95,7 @@ export function ThemeBuilderPage() {
         }
       />
 
-      <div className="mx-auto grid max-w-[100rem] gap-8 px-4 py-8 lg:grid-cols-[320px_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-[100rem] min-w-0 gap-8 px-4 py-8 lg:grid-cols-[320px_1fr] lg:px-8">
         <aside className="space-y-6 lg:sticky lg:top-[calc(var(--showcase-bar-height)+1.5rem)] lg:self-start">
           <div>
             <h1 className="font-heading text-2xl font-semibold">Theme Builder</h1>

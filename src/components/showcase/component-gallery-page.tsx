@@ -65,12 +65,12 @@ function ComponentGalleryContent() {
         badge={`${galleryEntries.length} components`}
         trailing={
           <>
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-1.5"
-              onClick={() => setJumpOpen(true)}
-            >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="min-h-11 gap-1.5"
+                  onClick={() => setJumpOpen(true)}
+                >
               <SearchIcon className="size-3.5" />
               Jump
               <Badge variant="secondary" className="font-mono text-[10px]">
@@ -114,7 +114,7 @@ function ComponentGalleryContent() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Filter components…"
-                className="h-9 pl-9"
+                className="h-11 pl-9"
               />
             </div>
           </Reveal>
@@ -137,7 +137,7 @@ function ComponentGalleryContent() {
                   count={items.length}
                   countLabel="components"
                 />
-                <div className="grid gap-5 xl:grid-cols-2">
+                <div className="grid min-w-0 gap-5 md:grid-cols-1 xl:grid-cols-2">
                   {items.map((entry) => {
                     const Demo = galleryDemos[entry.demoKey]
                     return (

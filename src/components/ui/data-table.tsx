@@ -234,7 +234,7 @@ function DataTable<TData, TValue>({
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => table.setPageSize(Number(value))}
           >
-            <SelectTrigger className="h-8 w-[70px]">
+            <SelectTrigger className="min-h-11 w-[70px]">
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
@@ -248,6 +248,7 @@ function DataTable<TData, TValue>({
           <Button
             variant="outline"
             size="sm"
+            className="min-h-11"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -256,6 +257,7 @@ function DataTable<TData, TValue>({
           <Button
             variant="outline"
             size="sm"
+            className="min-h-11"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >

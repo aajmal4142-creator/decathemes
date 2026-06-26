@@ -39,7 +39,7 @@ export function GalleryStage({
           </span>
         </div>
       ) : null}
-      <div className="relative flex min-h-[7rem] flex-wrap items-center justify-center gap-3 p-5 sm:min-h-[8rem] sm:p-7">
+      <div className="relative flex min-h-[7rem] min-w-0 max-w-full flex-wrap items-center justify-center gap-3 overflow-x-auto p-5 sm:min-h-[8rem] sm:p-7">
         {children}
       </div>
     </div>

@@ -409,7 +409,7 @@ export function MarketingHome({
   themeSwitchMedia?: React.ReactNode
 }) {
   return (
-    <div className="relative flex flex-1 flex-col">
+    <div className="relative flex min-w-0 flex-1 flex-col overflow-x-clip">
       <MarketingNav />
 
       {/* Hero — demo first on mobile for instant proof */}
@@ -547,8 +547,31 @@ export function MarketingHome({
             alternatives.
           </p>
         </Reveal>
-        <Reveal delay={0.1} className="mt-12 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse text-sm">
+        <Reveal delay={0.1} className="mt-12">
+          <div className="space-y-3 md:hidden">
+            {comparisonRows.map((row) => (
+              <Card key={row.label}>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">{row.label}</CardTitle>
+                </CardHeader>
+                <CardContent className="grid gap-2 text-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-muted-foreground">DIY from scratch</span>
+                    <ComparisonCell value={row.diy} />
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-muted-foreground">Generic UI kit</span>
+                    <ComparisonCell value={row.generic} />
+                  </div>
+                  <div className="flex items-center justify-between gap-3 border-t pt-2">
+                    <span className="font-medium text-primary">Decathemes</span>
+                    <ComparisonCell value={row.decathemes} positive />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <table className="hidden w-full border-collapse text-sm md:table">
             <caption className="sr-only">
               Feature comparison: DIY, generic UI kit, and Decathemes
             </caption>
@@ -667,7 +690,7 @@ export function MarketingHome({
               purchase, lifetime updates.
             </p>
           </Reveal>
-          <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-8 lg:grid lg:grid-cols-2">
+          <div className="mx-auto mt-12 flex min-w-0 max-w-4xl flex-col gap-8 lg:grid lg:grid-cols-2">
             {[...licenses]
               .sort((a, b) => {
                 if (a.highlighted && !b.highlighted) return -1

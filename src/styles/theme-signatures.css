@@ -1,3 +1,16 @@
+/* ─── Layout containment — decorative layers must not cause horizontal scroll ─ */
+
+[data-theme="brutalist"]::before,
+[data-theme="neon"]::after,
+[data-theme="retro"]::after,
+[data-theme="glass"] body::before,
+[data-theme="glass"] body::after {
+  contain: paint;
+  max-width: 100vw;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 /* ─── Shared theme identity base ─────────────────────────────────────────── */
 
 [data-theme] body {

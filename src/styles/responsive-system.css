@@ -195,6 +195,16 @@
     [data-slot="dropdown-menu-trigger"] button {
       min-height: 2.75rem;
     }
+
+    [data-slot="toggle-group-item"] {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
+
+    [data-slot="switch"] {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
   }
 
   /* Popover/command mobile-safe width */

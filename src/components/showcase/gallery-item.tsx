@@ -41,7 +41,7 @@ export const GalleryItem = React.memo(function GalleryItem({
     <article
       id={id}
       className={cn(
-        "@container/gallery-item scroll-mt-36 overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-sm ring-1 ring-border/40",
+        "@container/gallery-item scroll-mt-36 min-w-0 max-w-full overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-sm ring-1 ring-border/40",
         compareMode && "xl:col-span-2",
         className
       )}

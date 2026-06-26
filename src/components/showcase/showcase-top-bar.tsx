@@ -135,14 +135,14 @@ export function ShowcaseTopBar({
             </nav>
           </div>
 
-          <div className="flex flex-wrap items-center justify-end gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2 min-w-0 w-full sm:w-auto">
             <ColorModeToggleCompact />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="gap-1.5"
+                  className="min-h-11 gap-1.5"
                   aria-label={`Theme: ${themes.find((t) => t.id === themeId)?.name ?? "Select theme"}`}
                 >
                   <span
@@ -176,8 +176,12 @@ export function ShowcaseTopBar({
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
-            {trailing}
-            <Button size="sm" asChild className="shadow-sm">
+            {trailing ? (
+              <div className="flex w-full min-w-0 flex-wrap items-center justify-end gap-2 sm:w-auto">
+                {trailing}
+              </div>
+            ) : null}
+            <Button size="sm" asChild className="min-h-11 shadow-sm">
               <a
                 href={siteConfig.purchaseUrl}
                 target="_blank"
