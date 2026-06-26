@@ -1,0 +1,37 @@
+/* During view transitions, let the API handle the wipe — no double-fade */
+html.theme-view-transition.transition-theme,
+html.theme-view-transition.transition-theme * {
+  transition: none !important;
+}
+
+/* Circular clip-path reveal from click coordinates */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-view-transition::view-transition-old(root),
+  html.theme-view-transition::view-transition-new(root) {
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  html.theme-view-transition::view-transition-old(root) {
+    z-index: 1;
+    animation-name: theme-view-fade-out;
+  }
+
+  html.theme-view-transition::view-transition-new(root) {
+    z-index: 2;
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+    animation-name: theme-circle-reveal;
+  }
+
+  @keyframes theme-circle-reveal {
+    to {
+      clip-path: circle(150vmax at var(--theme-transition-x) var(--theme-transition-y));
+    }
+  }
+
+  @keyframes theme-view-fade-out {
+    to {
+      opacity: 0.85;
+    }
+  }
+}

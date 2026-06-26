@@ -1,0 +1,108 @@
+[data-theme="corporate"] {
+  --background: oklch(0.98 0.008 250);
+  --foreground: oklch(0.22 0.04 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.04 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 250);
+  --primary: oklch(0.48 0.17 255);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.015 250);
+  --secondary-foreground: oklch(0.28 0.06 250);
+  --muted: oklch(0.96 0.01 250);
+  --muted-foreground: oklch(0.44 0.04 250);
+  --accent: oklch(0.93 0.03 250);
+  --accent-foreground: oklch(0.28 0.06 250);
+  --destructive: oklch(0.52 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.02 250);
+  --input: oklch(0.9 0.02 250);
+  --ring: oklch(0.48 0.17 255);
+  --chart-1: oklch(0.48 0.17 255);
+  --chart-2: oklch(0.55 0.14 200);
+  --chart-3: oklch(0.6 0.12 150);
+  --chart-4: oklch(0.65 0.14 280);
+  --chart-5: oklch(0.58 0.16 30);
+  --sidebar: oklch(0.97 0.01 250);
+  --sidebar-foreground: oklch(0.22 0.04 250);
+  --sidebar-primary: oklch(0.48 0.17 255);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.02 250);
+  --sidebar-accent-foreground: oklch(0.28 0.06 250);
+  --sidebar-border: oklch(0.9 0.02 250);
+  --sidebar-ring: oklch(0.48 0.17 255);
+
+  --radius: 0.5rem;
+  --font-sans-family: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-serif-family: var(--font-ibm-plex-sans), ui-sans-serif, sans-serif;
+  --font-heading-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --theme-heading-tracking: -0.015em;
+  --theme-body-leading: 1.6;
+  --theme-border-width: 1px;
+
+  --shadow-xs:
+    0 1px 2px 0 oklch(0.3 0.06 255 / 0.06), 0 1px 1px -1px oklch(0.3 0.06 255 / 0.04);
+  --shadow-sm:
+    0 2px 6px 0 oklch(0.3 0.06 255 / 0.08), 0 1px 3px -1px oklch(0.3 0.06 255 / 0.06);
+  --shadow-md:
+    0 4px 12px 0 oklch(0.3 0.06 255 / 0.1), 0 2px 6px -2px oklch(0.3 0.06 255 / 0.08);
+  --shadow-lg:
+    0 8px 24px 0 oklch(0.3 0.06 255 / 0.12), 0 4px 10px -4px oklch(0.3 0.06 255 / 0.1);
+  --shadow-xl:
+    0 16px 40px 0 oklch(0.3 0.06 255 / 0.14), 0 8px 20px -8px oklch(0.3 0.06 255 / 0.12);
+
+  --spacing-unit: 0.34rem;
+  --spacing-1: calc(var(--spacing-unit) * 1);
+  --spacing-2: calc(var(--spacing-unit) * 2);
+  --spacing-3: calc(var(--spacing-unit) * 3);
+  --spacing-4: calc(var(--spacing-unit) * 4);
+  --spacing-5: calc(var(--spacing-unit) * 5);
+  --spacing-6: calc(var(--spacing-unit) * 6);
+  --spacing-8: calc(var(--spacing-unit) * 8);
+  --spacing-10: calc(var(--spacing-unit) * 10);
+  --spacing-12: calc(var(--spacing-unit) * 12);
+  --spacing-16: calc(var(--spacing-unit) * 16);
+}
+
+[data-theme="corporate"].dark {
+  --background: oklch(0.16 0.03 250);
+  --foreground: oklch(0.95 0.02 250);
+  --card: oklch(0.2 0.035 250);
+  --card-foreground: oklch(0.95 0.02 250);
+  --popover: oklch(0.22 0.035 250);
+  --popover-foreground: oklch(0.95 0.02 250);
+  --primary: oklch(0.65 0.16 255);
+  --primary-foreground: oklch(0.12 0.04 250);
+  --secondary: oklch(0.26 0.04 250);
+  --secondary-foreground: oklch(0.95 0.02 250);
+  --muted: oklch(0.24 0.035 250);
+  --muted-foreground: oklch(0.72 0.03 250);
+  --accent: oklch(0.28 0.05 250);
+  --accent-foreground: oklch(0.95 0.02 250);
+  --destructive: oklch(0.48 0.2 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.65 0.16 255);
+  --chart-1: oklch(0.65 0.16 255);
+  --chart-2: oklch(0.68 0.12 200);
+  --chart-3: oklch(0.72 0.1 150);
+  --chart-4: oklch(0.7 0.12 280);
+  --chart-5: oklch(0.68 0.14 30);
+  --sidebar: oklch(0.14 0.03 250);
+  --sidebar-foreground: oklch(0.95 0.02 250);
+  --sidebar-primary: oklch(0.65 0.16 255);
+  --sidebar-primary-foreground: oklch(0.12 0.04 250);
+  --sidebar-accent: oklch(0.26 0.04 250);
+  --sidebar-accent-foreground: oklch(0.95 0.02 250);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.65 0.16 255);
+
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.28);
+  --shadow-sm: 0 2px 6px 0 oklch(0 0 0 / 0.32);
+  --shadow-md: 0 4px 12px 0 oklch(0 0 0 / 0.36);
+  --shadow-lg: 0 8px 24px 0 oklch(0 0 0 / 0.4);
+  --shadow-xl: 0 16px 40px 0 oklch(0 0 0 / 0.45);
+}

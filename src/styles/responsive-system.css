@@ -1,0 +1,243 @@
+/**
+ * Decathemes responsive system — mobile-first, fluid type/space, safe areas.
+ * See RESPONSIVE.md for breakpoint and component rules.
+ */
+
+/* ── Fluid typography (320px → 1920px) mapped to theme font tokens ── */
+:root {
+  --text-display: clamp(2rem, 1.35rem + 2.75vw, 3.5rem);
+  --text-h1: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  --text-h2: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 1.05rem + 1vw, 1.75rem);
+  --text-h4: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-body-lg: clamp(1rem, 0.94rem + 0.3vw, 1.25rem);
+  --text-body: clamp(0.875rem, 0.84rem + 0.18vw, 1rem);
+  --text-body-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --text-caption: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+  /* Fluid section rhythm */
+  --section-py: clamp(3rem, 2rem + 4vw, 6rem);
+  --section-py-sm: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  --section-px: clamp(1rem, 0.5rem + 2vw, 2rem);
+  --content-gap: clamp(1rem, 0.75rem + 1.25vw, 1.5rem);
+  --grid-gap: clamp(1rem, 0.65rem + 1.75vw, 2rem);
+
+  /* Safe-area insets for notched devices */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+/* Container query breakpoints (component-level, not viewport) */
+@custom-variant @container-sm (&:where(@container (min-width: 20rem) *));
+@custom-variant @container-md (&:where(@container (min-width: 28rem) *));
+@custom-variant @container-lg (&:where(@container (min-width: 36rem) *));
+
+@layer base {
+  /* Global overflow guard — no horizontal scroll */
+  html {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  /* Fluid heading scale — use .font-heading for theme personality */
+  .text-display {
+    font-family: var(--font-heading-family);
+    font-size: var(--text-display);
+    line-height: 1.08;
+    letter-spacing: var(--theme-heading-tracking, -0.02em);
+  }
+
+  .text-fluid-h1 {
+    font-family: var(--font-heading-family);
+    font-size: var(--text-h1);
+    line-height: 1.12;
+    letter-spacing: var(--theme-heading-tracking, -0.02em);
+  }
+
+  .text-fluid-h2 {
+    font-family: var(--font-heading-family);
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: var(--theme-heading-tracking, -0.02em);
+  }
+
+  .text-fluid-h3 {
+    font-family: var(--font-heading-family);
+    font-size: var(--text-h3);
+    line-height: 1.2;
+  }
+
+  .text-fluid-body-lg {
+    font-size: var(--text-body-lg);
+    line-height: 1.6;
+  }
+
+  .text-fluid-body {
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+}
+
+@layer utilities {
+  /* Section spacing */
+  .section-py {
+    padding-block: var(--section-py);
+  }
+
+  .section-py-sm {
+    padding-block: var(--section-py-sm);
+  }
+
+  .section-px {
+    padding-inline: var(--section-px);
+  }
+
+  /* Page shell — consistent max-width + horizontal padding */
+  .page-shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: var(--section-px);
+  }
+
+  .page-shell-wide {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 100rem;
+    padding-inline: var(--section-px);
+  }
+
+  /* Responsive card/grid columns: 1 → 2 → 3 → 4 */
+  .grid-responsive-cards {
+    display: grid;
+    gap: var(--grid-gap);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .grid-responsive-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid-responsive-cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .grid-responsive-cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /* Safe-area padding for fixed/sticky chrome */
+  .safe-area-top {
+    padding-top: max(0.5rem, var(--safe-top));
+  }
+
+  .safe-area-bottom {
+    padding-bottom: max(0.5rem, var(--safe-bottom));
+  }
+
+  .safe-area-x {
+    padding-left: max(var(--section-px), var(--safe-left));
+    padding-right: max(var(--section-px), var(--safe-right));
+  }
+
+  .safe-area-inset-bottom {
+    padding-bottom: calc(0.75rem + var(--safe-bottom));
+  }
+
+  /* Sticky/fixed bars with notch support */
+  .sticky-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding-top: var(--safe-top);
+  }
+
+  /* Scrollable tabs — never clip on mobile */
+  .tabs-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 100%;
+  }
+
+  .tabs-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Touch targets — minimum 44×44px on coarse pointers */
+  @media (pointer: coarse) {
+    .touch-target,
+    [data-slot="button"]:not([data-size="xs"]):not([data-size="icon-xs"]) {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
+
+    [data-slot="tabs-trigger"] {
+      min-height: 2.75rem;
+      padding-inline: 0.75rem;
+    }
+
+    [data-slot="select-trigger"],
+    [data-slot="dropdown-menu-trigger"] button {
+      min-height: 2.75rem;
+    }
+  }
+
+  /* Popover/command mobile-safe width */
+  .popover-mobile-safe {
+    width: min(calc(100vw - 2rem - var(--safe-left) - var(--safe-right)), 28rem);
+    max-width: calc(100vw - 2rem);
+  }
+
+  /* Chart mobile axis — rotate labels, hide overflow */
+  [data-slot="chart"] .recharts-xAxis .recharts-cartesian-axis-tick-value {
+    font-size: 10px;
+  }
+
+  @media (max-width: 767px) {
+    [data-slot="chart"] .recharts-xAxis .recharts-cartesian-axis-tick-value {
+      transform: rotate(-35deg);
+      text-anchor: end;
+    }
+
+    [data-slot="chart"] .recharts-legend-wrapper {
+      font-size: 11px;
+    }
+  }
+
+  /* Data table sticky first column (when table layout is used) */
+  .table-sticky-first [data-slot="table-head"]:first-child,
+  .table-sticky-first [data-slot="table-cell"]:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--background);
+    box-shadow: 2px 0 4px -2px color-mix(in oklch, var(--foreground) 8%, transparent);
+  }
+
+  .table-sticky-first [data-slot="table-head"]:first-child {
+    z-index: 2;
+    background: var(--muted);
+  }
+
+  /* Showcase page overflow guard */
+  .showcase-page {
+    overflow-x: clip;
+    max-width: 100%;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,105 @@
+[data-theme="editorial"] {
+  --background: #faf8f3;
+  --foreground: oklch(0.22 0.04 50);
+  --card: oklch(0.995 0.01 85);
+  --card-foreground: oklch(0.22 0.04 50);
+  --popover: oklch(0.995 0.01 85);
+  --popover-foreground: oklch(0.22 0.04 50);
+  --primary: oklch(0.28 0.05 50);
+  --primary-foreground: oklch(0.97 0.02 85);
+  --secondary: oklch(0.94 0.02 85);
+  --secondary-foreground: oklch(0.28 0.05 50);
+  --muted: oklch(0.93 0.02 85);
+  --muted-foreground: oklch(0.44 0.04 50);
+  --accent: oklch(0.52 0.12 35);
+  --accent-foreground: oklch(0.98 0.015 85);
+  --destructive: oklch(0.48 0.18 25);
+  --destructive-foreground: oklch(0.98 0.015 85);
+  --border: oklch(0.82 0.025 85);
+  --input: oklch(0.82 0.025 85);
+  --ring: oklch(0.42 0.06 50);
+  --chart-1: oklch(0.42 0.06 50);
+  --chart-2: oklch(0.52 0.12 35);
+  --chart-3: oklch(0.5 0.06 150);
+  --chart-4: oklch(0.6 0.08 85);
+  --chart-5: oklch(0.42 0.08 280);
+  --sidebar: oklch(0.96 0.02 85);
+  --sidebar-foreground: oklch(0.22 0.04 50);
+  --sidebar-primary: oklch(0.28 0.05 50);
+  --sidebar-primary-foreground: oklch(0.97 0.02 85);
+  --sidebar-accent: oklch(0.93 0.025 85);
+  --sidebar-accent-foreground: oklch(0.28 0.05 50);
+  --sidebar-border: oklch(0.82 0.025 85);
+  --sidebar-ring: oklch(0.42 0.06 50);
+
+  --radius: 0.25rem;
+  --font-sans-family: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-serif-family: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-heading-family:
+    var(--font-fraunces), var(--font-playfair), ui-serif, Georgia, serif;
+
+  --theme-heading-tracking: -0.01em;
+  --theme-body-leading: 1.7;
+  --theme-border-width: 1px;
+  --theme-gold-accent: oklch(0.52 0.12 35);
+
+  --shadow-xs: 0 1px 2px 0 oklch(0.3 0.04 50 / 0.05);
+  --shadow-sm: 0 1px 3px 0 oklch(0.3 0.04 50 / 0.07);
+  --shadow-md: 0 3px 6px 0 oklch(0.3 0.04 50 / 0.09);
+  --shadow-lg: 0 6px 12px 0 oklch(0.3 0.04 50 / 0.11);
+  --shadow-xl: 0 12px 24px 0 oklch(0.3 0.04 50 / 0.13);
+
+  --spacing-unit: 0.3rem;
+  --spacing-1: calc(var(--spacing-unit) * 1);
+  --spacing-2: calc(var(--spacing-unit) * 2);
+  --spacing-3: calc(var(--spacing-unit) * 3);
+  --spacing-4: calc(var(--spacing-unit) * 4);
+  --spacing-5: calc(var(--spacing-unit) * 5);
+  --spacing-6: calc(var(--spacing-unit) * 6);
+  --spacing-8: calc(var(--spacing-unit) * 8);
+  --spacing-10: calc(var(--spacing-unit) * 10);
+  --spacing-12: calc(var(--spacing-unit) * 12);
+  --spacing-16: calc(var(--spacing-unit) * 16);
+}
+
+[data-theme="editorial"].dark {
+  --background: oklch(0.18 0.03 50);
+  --foreground: oklch(0.93 0.02 85);
+  --card: oklch(0.22 0.03 50);
+  --card-foreground: oklch(0.93 0.02 85);
+  --popover: oklch(0.24 0.03 50);
+  --popover-foreground: oklch(0.93 0.02 85);
+  --primary: oklch(0.88 0.03 85);
+  --primary-foreground: oklch(0.18 0.03 50);
+  --secondary: oklch(0.28 0.03 50);
+  --secondary-foreground: oklch(0.93 0.02 85);
+  --muted: oklch(0.26 0.03 50);
+  --muted-foreground: oklch(0.72 0.03 85);
+  --accent: oklch(0.65 0.12 35);
+  --accent-foreground: oklch(0.15 0.03 35);
+  --destructive: oklch(0.48 0.2 22);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.93 0.02 85 / 15%);
+  --input: oklch(0.93 0.02 85 / 18%);
+  --ring: oklch(0.75 0.03 85);
+  --chart-1: oklch(0.85 0.03 85);
+  --chart-2: oklch(0.65 0.12 35);
+  --chart-3: oklch(0.6 0.06 150);
+  --chart-4: oklch(0.7 0.06 85);
+  --chart-5: oklch(0.55 0.08 280);
+  --sidebar: oklch(0.16 0.03 50);
+  --sidebar-foreground: oklch(0.93 0.02 85);
+  --sidebar-primary: oklch(0.88 0.03 85);
+  --sidebar-primary-foreground: oklch(0.18 0.03 50);
+  --sidebar-accent: oklch(0.28 0.03 50);
+  --sidebar-accent-foreground: oklch(0.93 0.02 85);
+  --sidebar-border: oklch(0.93 0.02 85 / 15%);
+  --sidebar-ring: oklch(0.75 0.03 85);
+
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.25);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.3);
+  --shadow-md: 0 3px 6px 0 oklch(0 0 0 / 0.35);
+  --shadow-lg: 0 6px 12px 0 oklch(0 0 0 / 0.4);
+  --shadow-xl: 0 12px 24px 0 oklch(0 0 0 / 0.45);
+}

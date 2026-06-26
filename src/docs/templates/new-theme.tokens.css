@@ -1,0 +1,115 @@
+/* Copy this file to src/themes/<your-theme-id>/tokens.css
+   Replace "mytheme" with your theme id (lowercase, hyphenated).
+   Register the theme in src/themes/_registry.ts
+   Import this file in src/styles/globals.css */
+
+[data-theme="mytheme"] {
+  /* ── Core surfaces ── */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+
+  /* ── Brand & semantic ── */
+  --primary: oklch(0.45 0.15 250);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.25 0.02 250);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.94 0.02 250);
+  --accent-foreground: oklch(0.25 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* ── UI chrome ── */
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.55 0.1 250);
+
+  /* ── Charts (Recharts) ── */
+  --chart-1: oklch(0.55 0.15 250);
+  --chart-2: oklch(0.6 0.12 180);
+  --chart-3: oklch(0.65 0.1 80);
+  --chart-4: oklch(0.5 0.08 320);
+  --chart-5: oklch(0.7 0.06 40);
+
+  /* ── Sidebar (app shells) ── */
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.2 0 0);
+  --sidebar-primary: oklch(0.45 0.15 250);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.02 250);
+  --sidebar-accent-foreground: oklch(0.25 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.55 0.1 250);
+
+  /* ── Shape & typography ── */
+  --radius: 0.5rem;
+  --font-sans-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-serif-family: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-heading-family: var(--font-sans-family);
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 1px 0 oklch(0 0 0 / 0.03);
+  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.04);
+  --shadow-md: 0 2px 4px 0 oklch(0 0 0 / 0.05);
+  --shadow-lg: 0 4px 8px 0 oklch(0 0 0 / 0.06);
+  --shadow-xl: 0 8px 16px 0 oklch(0 0 0 / 0.07);
+
+  /* ── Spacing scale (theme-relative) ── */
+  --spacing-unit: 0.25rem;
+  --spacing-1: calc(var(--spacing-unit) * 1);
+  --spacing-2: calc(var(--spacing-unit) * 2);
+  --spacing-3: calc(var(--spacing-unit) * 3);
+  --spacing-4: calc(var(--spacing-unit) * 4);
+  --spacing-5: calc(var(--spacing-unit) * 5);
+  --spacing-6: calc(var(--spacing-unit) * 6);
+  --spacing-8: calc(var(--spacing-unit) * 8);
+  --spacing-10: calc(var(--spacing-unit) * 10);
+  --spacing-12: calc(var(--spacing-unit) * 12);
+  --spacing-16: calc(var(--spacing-unit) * 16);
+}
+
+[data-theme="mytheme"].dark {
+  --background: oklch(0.14 0.01 250);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.18 0.01 250);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.18 0.01 250);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.72 0.12 250);
+  --primary-foreground: oklch(0.14 0 0);
+  --secondary: oklch(0.24 0.02 250);
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.24 0.01 250);
+  --muted-foreground: oklch(0.68 0 0);
+  --accent: oklch(0.26 0.03 250);
+  --accent-foreground: oklch(0.96 0 0);
+  --destructive: oklch(0.65 0.2 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.65 0.1 250);
+  --chart-1: oklch(0.72 0.12 250);
+  --chart-2: oklch(0.7 0.1 180);
+  --chart-3: oklch(0.75 0.08 80);
+  --chart-4: oklch(0.68 0.1 320);
+  --chart-5: oklch(0.8 0.06 40);
+  --sidebar: oklch(0.16 0.01 250);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.72 0.12 250);
+  --sidebar-primary-foreground: oklch(0.14 0 0);
+  --sidebar-accent: oklch(0.24 0.02 250);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.65 0.1 250);
+  --shadow-xs: 0 1px 1px 0 oklch(0 0 0 / 0.2);
+  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.25);
+  --shadow-md: 0 2px 4px 0 oklch(0 0 0 / 0.3);
+  --shadow-lg: 0 4px 8px 0 oklch(0 0 0 / 0.35);
+  --shadow-xl: 0 8px 16px 0 oklch(0 0 0 / 0.4);
+}

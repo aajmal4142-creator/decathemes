@@ -1,0 +1,698 @@
+/* ─── Shared theme identity base ─────────────────────────────────────────── */
+
+[data-theme] body {
+  line-height: var(--theme-body-leading, 1.5);
+}
+
+[data-theme] :is(h1, h2, h3, h4, h5, h6, .font-heading) {
+  font-family: var(--font-heading-family);
+  letter-spacing: var(--theme-heading-tracking, -0.02em);
+}
+
+[data-theme] [data-slot="card"],
+[data-theme] [data-slot="input"],
+[data-theme] [data-slot="button"] {
+  border-width: var(--theme-border-width, 1px);
+}
+
+/* ─── 1. MINIMAL — crisp, hairline, faint top gradient ───────────────────── */
+
+[data-theme="minimal"] body {
+  background-image: linear-gradient(
+    180deg,
+    oklch(0.97 0 0 / 0.9) 0%,
+    var(--background) 28%
+  );
+}
+
+[data-theme="minimal"].dark body {
+  background-image: linear-gradient(
+    180deg,
+    oklch(0.18 0 0 / 0.85) 0%,
+    var(--background) 28%
+  );
+}
+
+[data-theme="minimal"] [data-slot="card"],
+[data-theme="minimal"] [data-slot="input"] {
+  border-style: solid;
+  border-color: var(--border);
+  box-shadow: var(--shadow-xs);
+}
+
+[data-theme="minimal"] [data-slot="button"] {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="minimal"] [data-slot="button"]:focus-visible {
+  --tw-ring-shadow: none;
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+[data-theme="minimal"] :focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+[data-theme="minimal"] [data-slot="badge"] {
+  border-radius: calc(var(--radius) * 0.8);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+/* ─── 2. BRUTALIST — structure, offset shadow, marquee, raw labels ───────── */
+
+[data-theme="brutalist"] body {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+}
+
+[data-theme="brutalist"]::before {
+  content: "RAW · STRUCTURE · BRUTAL · VISIBLE GRID · NO POLISH · ";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: block;
+  padding: 0.35rem 0;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-family: var(--font-mono-family);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: brutalist-marquee 22s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes brutalist-marquee {
+  from {
+    text-indent: 0;
+  }
+  to {
+    text-indent: -50%;
+  }
+}
+
+[data-theme="brutalist"] body {
+  padding-top: 1.5rem;
+}
+
+[data-theme="brutalist"] :is(h1, .font-heading.text-3xl, .font-heading.text-4xl) {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+[data-theme="brutalist"] [data-slot="button"] {
+  border: 2px solid var(--foreground);
+  border-radius: 0;
+  box-shadow: var(--theme-shadow-offset, 4px 4px 0 0 var(--foreground));
+  font-family: var(--font-mono-family);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+[data-theme="brutalist"] [data-slot="button"]:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--foreground);
+}
+
+[data-theme="brutalist"] [data-slot="button"][data-variant="outline"] {
+  background: var(--background);
+}
+
+[data-theme="brutalist"] [data-slot="card"] {
+  border: 2px solid var(--foreground);
+  border-radius: 0;
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="brutalist"] [data-slot="input"] {
+  border: 2px solid var(--foreground);
+  border-radius: 0;
+  font-family: var(--font-mono-family);
+}
+
+[data-theme="brutalist"] [data-slot="badge"] {
+  border: 2px solid var(--foreground);
+  border-radius: 0;
+  font-family: var(--font-mono-family);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+[data-theme="brutalist"] [data-slot="badge"]::before {
+  content: "[ ";
+}
+
+[data-theme="brutalist"] [data-slot="badge"]::after {
+  content: " ]";
+}
+
+/* ─── 3. GLASS — frosted, mesh, noise, refraction highlights ─────────────── */
+
+[data-theme="glass"] body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse 80% 60% at 10% 20%,
+      oklch(0.82 0.12 280 / 0.55),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 90% 80%,
+      oklch(0.78 0.14 220 / 0.5),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 50% 50%,
+      oklch(0.88 0.1 310 / 0.35),
+      transparent
+    ),
+    linear-gradient(135deg, oklch(0.9 0.05 265), oklch(0.86 0.07 300));
+  background-attachment: fixed;
+  background-size:
+    200px 200px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  animation: glass-drift 18s ease-in-out infinite alternate;
+}
+
+[data-theme="glass"].dark body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse 80% 60% at 10% 20%,
+      oklch(0.38 0.14 280 / 0.45),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 90% 80%,
+      oklch(0.32 0.12 220 / 0.4),
+      transparent
+    ),
+    radial-gradient(ellipse 50% 40% at 50% 50%, oklch(0.4 0.12 310 / 0.3), transparent),
+    linear-gradient(135deg, oklch(0.14 0.05 270), oklch(0.18 0.06 300));
+}
+
+@keyframes glass-drift {
+  from {
+    background-position:
+      0 0,
+      0% 0%,
+      100% 100%,
+      50% 50%,
+      0% 0%;
+  }
+  to {
+    background-position:
+      40px 20px,
+      5% 10%,
+      95% 90%,
+      55% 45%,
+      0% 0%;
+  }
+}
+
+[data-theme="glass"] :is(.bg-card, .bg-popover, [data-slot="card"]) {
+  backdrop-filter: blur(var(--theme-glass-blur, 20px)) saturate(1.5);
+  -webkit-backdrop-filter: blur(var(--theme-glass-blur, 20px)) saturate(1.5);
+  border: 1px solid oklch(1 0 0 / 0.45);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.35);
+}
+
+[data-theme="glass"] [data-slot="card"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 0.25) 0%,
+    transparent 40%,
+    oklch(1 0 0 / 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+[data-theme="glass"] [data-slot="card"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="glass"] [data-slot="button"][data-variant="default"] {
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 1px 0 oklch(1 0 0 / 0.2);
+}
+
+/* ─── 4. NEON — grid, scanlines, glow text, HUD ──────────────────────────── */
+
+[data-theme="neon"] body {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(oklch(0.78 0.16 195 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.78 0.16 195 / 0.08) 1px, transparent 1px),
+    radial-gradient(
+      ellipse 60% 40% at 50% 0%,
+      oklch(0.78 0.16 195 / 0.12),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 30% at 80% 100%,
+      oklch(0.72 0.24 305 / 0.1),
+      transparent
+    );
+  background-size:
+    32px 32px,
+    32px 32px,
+    100% 100%,
+    100% 100%;
+}
+
+[data-theme="neon"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    oklch(0 0 0 / 0.12) 0px,
+    oklch(0 0 0 / 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+[data-theme="neon"] :is(h1, h2, h3, .font-heading) {
+  text-shadow: var(--theme-glow-cyan);
+  text-transform: uppercase;
+}
+
+[data-theme="neon"] [data-slot="button"] {
+  font-family: var(--font-mono-family);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid oklch(0.78 0.16 195 / 0.5);
+  box-shadow: var(--theme-glow-cyan);
+}
+
+[data-theme="neon"] [data-slot="button"][data-variant="default"] {
+  text-shadow: 0 0 8px oklch(0.78 0.16 195 / 0.6);
+}
+
+[data-theme="neon"] [data-slot="card"] {
+  border: 1px solid oklch(0.78 0.16 195 / 0.35);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 0 24px oklch(0.78 0.16 195 / 0.06);
+  background: oklch(0.12 0.05 280 / 0.85);
+}
+
+[data-theme="neon"] [data-slot="input"] {
+  font-family: var(--font-mono-family);
+  background: oklch(0.08 0.04 280 / 0.8);
+  border-color: oklch(0.78 0.16 195 / 0.4);
+  box-shadow: inset 0 0 12px oklch(0.78 0.16 195 / 0.08);
+}
+
+[data-theme="neon"] [data-slot="badge"] {
+  font-family: var(--font-mono-family);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid oklch(0.72 0.24 305 / 0.5);
+  box-shadow: var(--theme-glow-magenta);
+}
+
+/* ─── 5. CORPORATE — trustworthy, dividers, data-forward ─────────────────── */
+
+[data-theme="corporate"] body {
+  background-image: linear-gradient(
+    180deg,
+    oklch(0.96 0.02 255 / 0.5) 0%,
+    var(--background) 20%
+  );
+}
+
+[data-theme="corporate"] [data-slot="card"] {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="corporate"] [data-slot="card-header"] {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+[data-theme="corporate"] [data-slot="button"] {
+  font-family: var(--font-heading-family);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="corporate"] [data-slot="badge"] {
+  font-family: var(--font-heading-family);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+[data-theme="corporate"] hr,
+[data-theme="corporate"] [data-slot="separator"] {
+  border-color: var(--border);
+  opacity: 1;
+}
+
+/* ─── 6. EDITORIAL — paper, drop caps, pull quotes, columns ──────────────── */
+
+[data-theme="editorial"] body {
+  background-color: var(--background);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+[data-theme="editorial"] :is(h1, h2, h3, .font-heading) {
+  font-weight: 500;
+  font-style: normal;
+}
+
+[data-theme="editorial"] .font-heading.text-3xl::first-letter,
+[data-theme="editorial"] .font-heading.text-4xl::first-letter,
+[data-theme="editorial"] h1::first-letter {
+  float: left;
+  font-size: 3.2em;
+  line-height: 0.8;
+  margin: 0.05em 0.12em 0 0;
+  font-family: var(--font-heading-family);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+[data-theme="editorial"] [data-slot="card-description"] {
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+[data-theme="editorial"] [data-slot="card"] {
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+[data-theme="editorial"] [data-slot="button"] {
+  font-family: var(--font-serif-family);
+  border-radius: calc(var(--radius) * 0.5);
+  letter-spacing: 0.02em;
+}
+
+[data-theme="editorial"] [data-slot="badge"] {
+  font-family: var(--font-serif-family);
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+[data-theme="editorial"] [data-slot="card-title"]::before {
+  content: "§ ";
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* ─── 7. PLAYFUL — stickers, blobs, tilt, spring ─────────────────────────── */
+
+[data-theme="playful"] body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23f9a8d4' d='M45 120c-20-35 10-70 45-55 30-25 70 5 55 40 35 15 5 55-30 45-25 30-65 5-70-30z' opacity='.35'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%2393c5fd' d='M150 40c25 0 45 20 40 45 20 10 15 40-10 50-5 30-40 35-60 15-35 5-50-35-30-60 5-35 35-55 60-50z' opacity='.3'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, oklch(0.97 0.04 300), oklch(0.95 0.06 90));
+  background-position:
+    -5% 90%,
+    105% 10%,
+    0 0;
+  background-repeat: no-repeat;
+  background-size: 280px, 240px, 100%;
+}
+
+[data-theme="playful"] [data-slot="button"] {
+  border: var(--theme-border-width) solid oklch(0.28 0.1 300 / 0.15);
+  box-shadow: var(--theme-sticker-shadow);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease;
+}
+
+[data-theme="playful"] [data-slot="button"]:hover {
+  transform: rotate(-2deg) scale(1.03);
+  box-shadow: 0 7px 0 0 oklch(0.68 0.2 330 / 0.4);
+}
+
+[data-theme="playful"] [data-slot="card"] {
+  border: var(--theme-border-width) solid oklch(0.68 0.2 330 / 0.2);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="playful"] [data-slot="card"]:hover {
+  transform: rotate(0.6deg) translateY(-2px);
+}
+
+[data-theme="playful"] [data-slot="badge"] {
+  border: 2px solid currentColor;
+  font-weight: 700;
+  transform: rotate(-3deg);
+}
+
+[data-theme="playful"] [data-slot="input"] {
+  border-width: 2px;
+  border-color: oklch(0.68 0.2 330 / 0.35);
+}
+
+/* ─── 8. LUXURY — gold hairlines, letter-spaced labels, gallery spacing ──── */
+
+[data-theme="luxury"] body {
+  background-image: radial-gradient(
+    ellipse 50% 30% at 50% 0%,
+    oklch(0.75 0.1 85 / 0.06),
+    transparent
+  );
+}
+
+[data-theme="luxury"] [data-slot="card"] {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="luxury"] [data-slot="card-header"] {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+[data-theme="luxury"] [data-slot="card-title"] {
+  font-weight: 500;
+  letter-spacing: var(--theme-heading-tracking);
+}
+
+[data-theme="luxury"] [data-slot="card-description"],
+[data-theme="luxury"] [data-slot="badge"] {
+  font-family: var(--font-sans-family);
+  font-weight: 300;
+  letter-spacing: var(--theme-label-tracking);
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+[data-theme="luxury"] [data-slot="button"] {
+  font-family: var(--font-sans-family);
+  font-weight: 400;
+  letter-spacing: var(--theme-label-tracking);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="luxury"] [data-slot="button"]:hover {
+  letter-spacing: 0.28em;
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+[data-theme="luxury"] [data-slot="input"] {
+  border-color: var(--border);
+  border-width: 1px;
+  letter-spacing: 0.04em;
+}
+
+[data-theme="luxury"] .font-heading {
+  animation: luxury-fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes luxury-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── 9. RETRO — sunset gradients, grain, CRT scanlines ───────────────────── */
+
+[data-theme="retro"] body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E"),
+    linear-gradient(
+      180deg,
+      oklch(0.72 0.18 35 / 0.25) 0%,
+      oklch(0.58 0.12 195 / 0.2) 45%,
+      oklch(0.94 0.04 80) 100%
+    );
+  background-attachment: fixed;
+}
+
+[data-theme="retro"].dark body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.1'/%3E%3C/svg%3E"),
+    linear-gradient(
+      180deg,
+      oklch(0.55 0.18 35 / 0.35) 0%,
+      oklch(0.45 0.12 195 / 0.3) 50%,
+      oklch(0.18 0.05 55) 100%
+    );
+}
+
+[data-theme="retro"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    oklch(0 0 0 / 0.04) 0px,
+    oklch(0 0 0 / 0.04) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.5;
+}
+
+[data-theme="retro"] h1.font-heading,
+[data-theme="retro"] .font-heading.text-4xl {
+  font-family: var(--theme-display-family);
+  letter-spacing: 0.04em;
+}
+
+[data-theme="retro"] [data-slot="button"] {
+  border: var(--theme-border-width) solid var(--foreground);
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+[data-theme="retro"] [data-slot="card"] {
+  border: var(--theme-border-width) solid var(--foreground);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="retro"] [data-slot="badge"] {
+  border: 2px solid var(--foreground);
+  font-family: var(--font-heading-family);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ─── 10. ORGANIC — asymmetric radii, waves, calm motion ─────────────────── */
+
+[data-theme="organic"] body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%237aab6f' fill-opacity='.08' d='M0 64C240 100 480 20 720 64s480 36 720 0v56H0z'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse 60% 40% at 20% 80%,
+      oklch(0.55 0.08 140 / 0.1),
+      transparent
+    ),
+    radial-gradient(ellipse 50% 35% at 80% 20%, oklch(0.58 0.09 55 / 0.08), transparent);
+  background-position:
+    bottom center,
+    0 0,
+    0 0;
+  background-repeat: no-repeat;
+  background-size:
+    100% 120px,
+    100% 100%,
+    100% 100%;
+}
+
+[data-theme="organic"] [data-slot="card"],
+[data-theme="organic"] [data-slot="button"],
+[data-theme="organic"] [data-slot="input"] {
+  border-radius: var(--theme-radius-organic);
+}
+
+[data-theme="organic"] [data-slot="card"] {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s ease;
+}
+
+[data-theme="organic"] [data-slot="card"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="organic"] [data-slot="button"] {
+  font-family: var(--font-sans-family);
+  font-weight: 600;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="organic"] [data-slot="button"]:hover {
+  transform: scale(1.02);
+}
+
+[data-theme="organic"] [data-slot="badge"] {
+  border-radius: 999px 999px 999px 0.25rem;
+  font-family: var(--font-heading-family);
+  font-weight: 500;
+}
+
+[data-theme="organic"] .theme-organic-wave {
+  display: block;
+  width: 100%;
+  height: 48px;
+  margin-top: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath fill='%237aab6f' fill-opacity='.15' d='M0 24c150-24 300 24 450 0s300-24 450 0 300 24 450 0v24H0z'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  pointer-events: none;
+}

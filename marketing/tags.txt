@@ -1,0 +1,10 @@
+nextjs
+react
+shadcn
+tailwind
+ui kit
+dashboard
+themes
+typescript
+dark mode
+admin template

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Decathemes — Buyer Documentation v1.0.0</title>
+  <style>
+    :root { --fg: #171717; --muted: #525252; --border: #e5e5e5; --accent: #2563eb; --bg: #fafafa; --card: #fff; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #fafafa; --muted: #a3a3a3; --border: #404040; --accent: #60a5fa; --bg: #0a0a0a; --card: #171717; }
+    }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; line-height: 1.6; color: var(--fg); background: var(--bg); margin: 0; padding: 2rem 1rem; }
+    .wrap { max-width: 48rem; margin: 0 auto; }
+    h1 { font-size: 1.75rem; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.25rem; margin: 2rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+    p, li { color: var(--muted); }
+    a { color: var(--accent); }
+    code, pre { font-family: ui-monospace, monospace; font-size: 0.85rem; }
+    code { background: var(--card); border: 1px solid var(--border); padding: 0.1em 0.35em; border-radius: 4px; color: var(--fg); }
+    pre { background: var(--card); border: 1px solid var(--border); padding: 1rem; overflow-x: auto; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0; }
+    th, td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+    th { background: var(--card); color: var(--fg); }
+    .badge { display: inline-block; font-size: 0.75rem; background: var(--card); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 4px; margin-bottom: 1rem; }
+    nav ul { padding-left: 1.25rem; }
+    nav a { text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    .note { background: var(--card); border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="badge">v1.0.0 · Node.js 20+ · Next.js 16 · React 19</p>
+    <h1>Decathemes — Buyer Documentation</h1>
+    <p>Thank you for your purchase. This file ships in the download ZIP for offline reference. For searchable docs with theme preview, run the project and open <code>/docs</code>.</p>
+    <p><strong>Also included:</strong> <code>Documentation.md</code> (same content, Markdown format)</p>
+
+    <nav>
+      <h2 style="border:0;padding:0;margin-top:1.5rem">Contents</h2>
+      <ul>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#install">Installation</a></li>
+        <li><a href="#structure">Project structure</a></li>
+        <li><a href="#urls">Key URLs</a></li>
+        <li><a href="#config">Configuration</a></li>
+        <li><a href="#theming">Theming</a></li>
+        <li><a href="#components">Components &amp; blocks</a></li>
+        <li><a href="#deploy">Deployment</a></li>
+        <li><a href="#license">License</a></li>
+        <li><a href="#support">Support</a></li>
+      </ul>
+    </nav>
+
+    <h2 id="requirements">Requirements</h2>
+    <table>
+      <tr><th>Software</th><th>Version</th></tr>
+      <tr><td>Node.js</td><td><strong>20+</strong></td></tr>
+      <tr><td>Next.js</td><td><strong>16.2+</strong></td></tr>
+      <tr><td>React</td><td><strong>19</strong></td></tr>
+    </table>
+
+    <h2 id="install">Installation</h2>
+    <pre>npm install
+cp .env.example .env.local
+npm run dev</pre>
+    <p>Open <code>http://localhost:3000</code></p>
+    <h3>Production</h3>
+    <pre>npm run build
+npm run start</pre>
+    <h3>Scripts</h3>
+    <p><code>npm run dev</code> · <code>build</code> · <code>start</code> · <code>lint</code> · <code>typecheck</code> · <code>format</code></p>
+
+    <h2 id="structure">Project structure</h2>
+    <pre>src/app/          → Routes (/, /preview, /components, /blocks, /docs)
+src/components/ui/  → shadcn/ui primitives
+src/components/blocks/ → 62 page sections
+src/themes/         → Theme token CSS + registry
+src/lib/            → Theme engine, fonts, config
+src/styles/         → globals.css</pre>
+
+    <h2 id="urls">Key URLs</h2>
+    <ul>
+      <li><code>/</code> — Marketing homepage</li>
+      <li><code>/preview</code> — Live demo (10 themes, 6 pages)</li>
+      <li><code>/components</code> — Component gallery</li>
+      <li><code>/blocks</code> — Block library</li>
+      <li><code>/docs</code> — Documentation</li>
+    </ul>
+
+    <h2 id="config">Configuration (.env.local)</h2>
+    <pre>NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_PURCHASE_URL=https://codecanyon.net/item/your-item
+# NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX</pre>
+
+    <h2 id="theming">Theming</h2>
+    <p>Set <code>data-theme="minimal"</code> on <code>&lt;html&gt;</code>. Theme IDs: minimal, brutalist, glass, neon, corporate, editorial, playful, luxury, retro, organic.</p>
+    <p>Edit <code>src/themes/&lt;id&gt;/tokens.css</code>. Add themes using <code>src/docs/templates/new-theme.tokens.css</code>.</p>
+    <div class="note">Light and dark: each theme has <code>[data-theme="id"]</code> and <code>[data-theme="id"].dark</code> blocks. Color mode via next-themes.</div>
+
+    <h2 id="components">Components &amp; blocks</h2>
+    <pre>import { Button, Card } from "@/components/ui"
+import { HeroCentered } from "@/components/blocks/marketing/hero"</pre>
+    <p>Newsletter blocks call <code>submitNewsletter()</code> in <code>src/lib/newsletter.ts</code> — wire your email provider (TODO).</p>
+
+    <h2 id="deploy">Deployment</h2>
+    <p>Deploy to Vercel, Netlify, or <code>npm run build && npm run start</code> on Node 20+. Set <code>NEXT_PUBLIC_SITE_URL</code>. Use production URL as CodeCanyon live preview.</p>
+
+    <h2 id="license">License</h2>
+    <p>Envato <strong>Regular</strong> (free end users) or <strong>Extended</strong> (paid end users). One license per end product. See <code>LICENSE-NOTES.md</code> and <code>THIRD-PARTY-NOTICES.md</code>.</p>
+
+    <h2 id="support">Support</h2>
+    <p>CodeCanyon item comments · Include Node version, browser, reproduction steps · Read <code>README.md</code> and <code>/docs/faq</code></p>
+
+    <h2>Changelog v1.0.0</h2>
+    <p>Initial release: 10 themes, 50+ components, 62 blocks, 9 demo pages, galleries, docs, marketing site.</p>
+    <p style="margin-top:3rem;font-size:0.85rem">© Decathemes · Envato CodeCanyon</p>
+  </div>
+</body>
+</html>
