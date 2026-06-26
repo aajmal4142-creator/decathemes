@@ -123,7 +123,7 @@ export function CalendarDemo() {
 export function CommandDemo() {
   return (
     <Command className="max-w-sm rounded-lg border">
-      <CommandInput placeholder="Search commands…" />
+      <CommandInput placeholder="Search commands…" aria-label="Search commands" />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">

@@ -179,6 +179,7 @@ export function PreviewShell({
         </div>
 
         <div
+          data-testid="preview-frame-wrapper"
           className={cn(
             "relative w-full min-w-0 transition-[max-width] duration-300 ease-out",
             isConstrained && "mx-auto"

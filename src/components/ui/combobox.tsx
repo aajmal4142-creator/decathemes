@@ -52,6 +52,7 @@ function ComboboxTrigger({
       data-slot="combobox-trigger"
       className={cn("[&_svg:not([class*='size-'])]:size-4", className)}
       {...props}
+      aria-label={props["aria-label"] ?? "Toggle options"}
     >
       {children}
       <ChevronDownIcon
@@ -66,6 +67,7 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
   return (
     <ComboboxPrimitive.Clear
       data-slot="combobox-clear"
+      aria-label="Clear selection"
       render={<InputGroupButton variant="ghost" size="icon-xs" />}
       className={cn(className)}
       {...props}

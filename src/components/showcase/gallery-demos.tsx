@@ -273,9 +273,9 @@ export function RadioGroupDemo() {
 export function SelectDemo() {
   return (
     <div className="max-w-xs space-y-theme-2">
-      <Label>Fruit</Label>
+      <Label htmlFor="gallery-fruit-select">Fruit</Label>
       <Select defaultValue="apple">
-        <SelectTrigger>
+        <SelectTrigger id="gallery-fruit-select" aria-label="Fruit">
           <SelectValue placeholder="Pick a fruit" />
         </SelectTrigger>
         <SelectContent>
@@ -296,7 +296,7 @@ export function SliderDemo() {
           <Label>Volume</Label>
           <span className="text-muted-foreground">60%</span>
         </div>
-        <Slider defaultValue={[60]} max={100} step={1} />
+        <Slider defaultValue={[60]} max={100} step={1} aria-label="Volume" />
       </div>
     </div>
   )
@@ -352,9 +352,14 @@ export function FormDemo() {
 
 export function ComboboxDemo() {
   return (
-    <div className="max-w-xs">
+    <div className="max-w-xs space-y-theme-2">
+      <Label htmlFor="gallery-framework-combo">Framework</Label>
       <Combobox items={["Next.js", "React", "Tailwind"]}>
-        <ComboboxInput placeholder="Select framework" />
+        <ComboboxInput
+          id="gallery-framework-combo"
+          placeholder="Select framework"
+          aria-label="Select framework"
+        />
         <ComboboxContent>
           <ComboboxEmpty>No items found.</ComboboxEmpty>
           <ComboboxList>
@@ -511,7 +516,7 @@ export function ProgressDemo() {
         <Label>Uploading</Label>
         <span className="text-muted-foreground">{progress}%</span>
       </div>
-      <Progress value={progress} />
+      <Progress value={progress} aria-label="Upload progress" />
     </div>
   )
 }
@@ -909,7 +914,11 @@ export function ResizableDemo() {
 
 export function ScrollAreaDemo() {
   return (
-    <ScrollArea className="h-24 w-full max-w-md rounded-md border p-theme-4">
+    <ScrollArea
+      className="h-24 w-full max-w-md rounded-md border p-theme-4"
+      tabIndex={0}
+      aria-label="Scrollable demo content"
+    >
       <div className="space-y-2">
         {Array.from({ length: 12 }).map((_, index) => (
           <p key={index} className="text-sm text-muted-foreground">

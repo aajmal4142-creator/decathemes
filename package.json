@@ -15,6 +15,10 @@
     "audit:contrast": "node scripts/contrast-audit.mjs",
     "audit:lighthouse": "node scripts/lighthouse-audit.mjs",
     "prebuild": "node scripts/contrast-audit.mjs",
+    "pretest:e2e": "npm run build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report",
     "add-block": "node scripts/add-block.mjs"
   },
   "dependencies": {
@@ -46,7 +50,9 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@next/bundle-analyzer": "^16.2.9",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

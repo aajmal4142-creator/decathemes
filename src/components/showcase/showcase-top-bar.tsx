@@ -154,12 +154,12 @@ export function ShowcaseTopBar({
                     }}
                     aria-hidden
                   />
-                  <span className="hidden max-w-[5rem] truncate sm:inline">
+                  <span className="hidden max-w-[5rem] truncate sm:inline" aria-hidden="true">
                     {themes.find((t) => t.id === themeId)?.name ?? "Theme"}
                   </span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-64">
+              <DropdownMenuContent align="end" className="max-h-[min(85dvh,28rem)] w-64 overflow-y-auto">
                 <DropdownMenuLabel>Switch theme</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="grid grid-cols-2 gap-1.5 p-2">

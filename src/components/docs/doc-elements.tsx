@@ -136,7 +136,12 @@ export function DocPre({
           {title}
         </div>
       ) : null}
-      <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed sm:text-sm">
+      <pre
+        tabIndex={0}
+        role="region"
+        aria-label={title ?? "Code sample"}
+        className="overflow-x-auto p-4 font-mono text-xs leading-relaxed sm:text-sm"
+      >
         <code>{children}</code>
       </pre>
     </div>

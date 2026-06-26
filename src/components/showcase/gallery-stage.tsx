@@ -14,6 +14,7 @@ export function GalleryStage({
 }) {
   return (
     <div
+      data-gallery-stage
       className={cn(
         "gallery-stage relative overflow-hidden rounded-xl border border-border/70 bg-muted/25 shadow-[inset_0_1px_0_0_oklch(1_0_0/0.04)]",
         className

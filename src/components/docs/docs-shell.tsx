@@ -56,7 +56,11 @@ export function DocsShell({
       <div className="mx-auto grid max-w-[90rem] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[220px_minmax(0,1fr)_200px] lg:px-8">
         <aside className="hidden lg:block">
           <div className="sticky top-[calc(var(--showcase-bar-height)+1.5rem)]">
-            <ScrollArea className="h-[calc(100vh-var(--showcase-bar-height)-4rem)] pr-4">
+            <ScrollArea
+              className="h-[calc(100vh-var(--showcase-bar-height)-4rem)] pr-4"
+              tabIndex={0}
+              aria-label="Documentation navigation"
+            >
               <DocsSidebar />
             </ScrollArea>
           </div>
