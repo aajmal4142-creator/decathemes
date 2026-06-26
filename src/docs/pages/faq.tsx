@@ -6,9 +6,12 @@ import {
   DocInlineCode,
   DocLink,
   DocP,
+  DocPre,
+  DocRouteLink,
   DocUl,
 } from "@/components/docs/doc-elements"
 import { Badge } from "@/components/ui/badge"
+import { codecanyonLicenses } from "@/lib/pricing"
 import type { DocTocItem } from "@/docs/types"
 
 export const faqToc: DocTocItem[] = [
@@ -187,10 +190,11 @@ export function FaqPage() {
         <DocH2 id="licensing">Licensing</DocH2>
         <DocP>
           Decathemes is sold under Envato Market licenses. shadcn/ui components are MIT
-          licensed. Use Regular License for free end products; Extended when charging
-          end users. One license per end product. See{" "}
-          <DocLink href="/">pricing on the homepage</DocLink> and Envato&apos;s license
-          FAQ for details.
+          licensed. Use Regular License ({codecanyonLicenses.regular.price}) for free end
+          products; Extended ({codecanyonLicenses.extended.price}) when charging end
+          users. One license per end product. See{" "}
+          <DocLink href="/#pricing">pricing on the homepage</DocLink> and Envato&apos;s
+          license FAQ for details.
         </DocP>
         <DocCallout variant="note">
           For item support after purchase, use the CodeCanyon comments tab or your

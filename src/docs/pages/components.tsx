@@ -7,6 +7,7 @@ import {
   DocLink,
   DocP,
   DocPre,
+  DocRouteLink,
   DocUl,
 } from "@/components/docs/doc-elements"
 import { Badge } from "@/components/ui/badge"
@@ -22,6 +23,44 @@ export const componentsToc: DocTocItem[] = [
   { id: "overlays", title: "Overlays", level: 3 },
   { id: "adding-components", title: "Adding more components", level: 2 },
 ]
+
+const formsExampleCode = [
+  'import { zodResolver } from "@hookform/resolvers/zod"',
+  'import { useForm } from "react-hook-form"',
+  'import { z } from "zod"',
+  'import { Button, Form, FormField, FormItem, FormLabel, Input } from "@/components/ui"',
+  "",
+  "const schema = z.object({ email: z.string().email() })",
+  "",
+  "function EmailForm() {",
+  "  const form = useForm({ resolver: zodResolver(schema) })",
+  "  return (",
+  "    <Form {...form}>",
+  '      <form onSubmit={form.handleSubmit((data) => { /* send data */ })}>',
+  '        <FormField name="email" render={({ field }) => (',
+  "          <FormItem>",
+  "            <FormLabel>Email</FormLabel>",
+  '            <Input {...field} type="email" />',
+  "          </FormItem>",
+  "        )} />",
+  '        <Button type="submit">Submit</Button>',
+  "      </form>",
+  "    </Form>",
+  "  )",
+  "}",
+].join("\n")
+
+const dataTableExampleCode = [
+  'import { type ColumnDef } from "@tanstack/react-table"',
+  'import { DataTable } from "@/components/ui/data-table"',
+  "",
+  "const columns: ColumnDef<Row>[] = [",
+  '  { accessorKey: "email", header: "Email" },',
+  '  { accessorKey: "role", header: "Role" },',
+  "]",
+  "",
+  '<DataTable columns={columns} data={rows} searchKey="email" />',
+].join("\n")
 
 export function ComponentsPage() {
   return (
@@ -40,9 +79,9 @@ export function ComponentsPage() {
       <section className="space-y-4">
         <DocH2 id="gallery">Component gallery</DocH2>
         <DocP>
-          Browse every component with live demos, code peek, and theme switching at{" "}
-          <DocLink href="/components">/components</DocLink>. Use ⌘F to search and jump
-          between categories: inputs, feedback, navigation, data, and more.
+          Browse every component with live demos, code peek, and theme switching at the{" "}
+          <DocRouteLink href="/components" label="component gallery" />. Use ⌘F to search
+          and jump between categories: inputs, feedback, navigation, data, and more.
         </DocP>
         <DocCallout variant="tip">
           The gallery is the fastest way to see how a component looks across all 10
@@ -74,29 +113,7 @@ export function ComponentsPage() {
           validated inputs. The gallery includes Field, Input, Select, Checkbox, Switch,
           and DatePicker demos.
         </DocP>
-        <DocPre>{`import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button, Form, FormField, FormItem, FormLabel, Input } from "@/components/ui"
-
-const schema = z.object({ email: z.string().email() })
-
-function EmailForm() {
-  const form = useForm({ resolver: zodResolver(schema) })
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit((data) => { /* send data */ })}>
-        <FormField name="email" render={({ field }) => (
-          <FormItem>
-            <FormLabel>Email</FormLabel>
-            <Input {...field} type="email" />
-          </FormItem>
-        )} />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
-  )
-}`}</DocPre>
+        <DocPre>{formsExampleCode}</DocPre>
 
         <DocH3 id="data-display">Data display</DocH3>
         <DocP>
@@ -104,15 +121,7 @@ function EmailForm() {
           filtering, and pagination. <DocInlineCode>Chart</DocInlineCode> wraps Recharts
           with theme-aware colors via <DocInlineCode>--chart-1</DocInlineCode> tokens.
         </DocP>
-        <DocPre title="DataTable">{`import { type ColumnDef } from "@tanstack/react-table"
-import { DataTable } from "@/components/ui/data-table"
-
-const columns: ColumnDef<Row>[] = [
-  { accessorKey: "email", header: "Email" },
-  { accessorKey: "role", header: "Role" },
-]
-
-<DataTable columns={columns} data={rows} searchKey="email" />`}</DocPre>
+        <DocPre title="DataTable">{dataTableExampleCode}</DocPre>
 
         <DocH3 id="overlays">Overlays</DocH3>
         <DocP>

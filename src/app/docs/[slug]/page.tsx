@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { ShowcaseRouteSkeleton } from "@/components/showcase/showcase-route-skeleton"
 import { getDocPage, getAllDocPages } from "@/docs/registry"
+import { pageMetadata } from "@/lib/page-metadata"
 
 import type { Metadata } from "next"
 
@@ -30,10 +31,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Docs — Decathemes" }
   }
 
-  return {
+  return pageMetadata({
+    path: `/docs/${slug}`,
     title: `${page.title} — Decathemes Docs`,
     description: page.description,
-  }
+  })
 }
 
 export default async function DocPage({ params }: PageProps) {

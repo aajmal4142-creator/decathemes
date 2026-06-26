@@ -1,16 +1,27 @@
-"use client"
-
-import { MonitorPlayIcon } from "lucide-react"
+import fs from "node:fs"
+import path from "node:path"
 
 import { Section } from "@/components/layout/section"
 import { Reveal } from "@/components/motion/reveal"
+import {
+  ThemeSwitchDemoFrame,
+  ThemeSwitchVideo,
+} from "@/components/marketing/theme-switch-video"
 import { Badge } from "@/components/ui/badge"
 
-/**
- * Placeholder for a ~20s looping screen capture of the theme-switch moment.
- * TODO: Drop in `/public/marketing/theme-switch-demo.mp4` (and optional poster).
- */
+function hasThemeSwitchDemoVideo(): boolean {
+  try {
+    return fs.existsSync(
+      path.join(process.cwd(), "public/marketing/theme-switch-demo.mp4")
+    )
+  } catch {
+    return false
+  }
+}
+
 export function ThemeSwitchMedia() {
+  const hasVideo = hasThemeSwitchDemoVideo()
+
   return (
     <Section
       spacing="compact"
@@ -33,35 +44,9 @@ export function ThemeSwitchMedia() {
       </Reveal>
 
       <Reveal delay={0.08} className="relative mx-auto mt-10 max-w-4xl">
-        <div className="relative aspect-video overflow-hidden rounded-2xl border bg-card shadow-xl ring-1 ring-border/50">
-          {/*
-            TODO: Replace placeholder with looping capture:
-            <video
-              className="size-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster="/marketing/theme-switch-poster.jpg"
-            >
-              <source src="/marketing/theme-switch-demo.mp4" type="video/mp4" />
-            </video>
-          */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-muted/50 via-background to-muted/30 p-6 text-center">
-            <div className="flex size-14 items-center justify-center rounded-2xl border bg-background shadow-sm">
-              <MonitorPlayIcon className="size-7 text-primary" />
-            </div>
-            <p className="max-w-sm text-sm font-medium">
-              TODO: Drop 20s theme-switch screen capture here
-            </p>
-            <p className="max-w-md text-xs text-muted-foreground">
-              Add{" "}
-              <code className="font-mono">/public/marketing/theme-switch-demo.mp4</code>{" "}
-              — auto-play, loop, muted. Record the circular wipe from the live preview
-              or hero auto-cycle.
-            </p>
-          </div>
-        </div>
+        <ThemeSwitchDemoFrame hasVideo={hasVideo}>
+          {hasVideo ? <ThemeSwitchVideo /> : null}
+        </ThemeSwitchDemoFrame>
       </Reveal>
     </Section>
   )

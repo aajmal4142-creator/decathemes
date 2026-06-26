@@ -7,6 +7,7 @@ import {
   DocLink,
   DocP,
   DocPre,
+  DocRouteLink,
   DocUl,
 } from "@/components/docs/doc-elements"
 import { Badge } from "@/components/ui/badge"
@@ -48,9 +49,10 @@ export function GettingStartedPage() {
           demo page restyles instantly. Light and dark mode are independent per theme.
         </DocP>
         <DocCallout variant="tip" title="CodeCanyon reviewers">
-          Use <DocLink href="/preview">/preview</DocLink> as the live demo link. The
-          marketing homepage at <DocLink href="/">/</DocLink> is the product landing
-          page buyers see before purchase.
+          Use <DocRouteLink href="/preview" label="Live preview hub" /> as the live demo
+          link. The marketing homepage at{" "}
+          <DocRouteLink href="/" label="Homepage" /> is the product landing page buyers
+          see before purchase.
         </DocCallout>
       </section>
 
@@ -115,7 +117,7 @@ npm run start`}</DocPre>
 │   └── marketing/          # Product homepage sections
 ├── themes/
 │   ├── _registry.ts        # Theme metadata (id, name, tags)
-│   └── <theme-id>/
+│   └── &lt;theme-id&gt;/
 │       └── tokens.css      # Full light + dark token set
 ├── hooks/                  # useMounted, useShowcaseCatalog, …
 ├── lib/
@@ -197,16 +199,16 @@ function ThemeButton() {
         <DocH2 id="explore-the-product">Explore the product</DocH2>
         <DocUl>
           <li>
-            <DocLink href="/preview">/preview</DocLink> — Nine full demo pages with
-            viewport switcher and theme bar
+            <DocRouteLink href="/preview" label="Live preview hub" /> — Nine full demo
+            pages with viewport switcher and theme bar
           </li>
           <li>
-            <DocLink href="/components">/components</DocLink> — Interactive gallery of
-            every UI primitive
+            <DocRouteLink href="/components" label="Component gallery" /> — Interactive
+            gallery of every UI primitive
           </li>
           <li>
-            <DocLink href="/blocks">/blocks</DocLink> — 62 page blocks with copy code
-            buttons
+            <DocRouteLink href="/blocks" label="Block library" /> — 62 page blocks with
+            copy code buttons
           </li>
           <li>
             <DocLink href="/docs/theming">Theming guide</DocLink> — How{" "}

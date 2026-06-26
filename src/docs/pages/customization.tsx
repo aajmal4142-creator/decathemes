@@ -21,6 +21,9 @@ export const customizationToc: DocTocItem[] = [
   { id: "transitions", title: "Theme transitions", level: 2 },
 ]
 
+const darkModeProviderCode =
+  '<NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>'
+
 export function CustomizationPage() {
   return (
     <article className="space-y-8">
@@ -142,7 +145,7 @@ setTweaks({ ...tweaks, radiusScale: "round" })`}</DocPre>
       <section className="space-y-4">
         <DocH2 id="dark-mode">Dark mode</DocH2>
         <DocP>Set default color mode in ThemeProvider:</DocP>
-        <DocPre>{`<NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>`}</DocPre>
+        <DocPre>{darkModeProviderCode}</DocPre>
         <DocP>
           Force dark on marketing pages with{" "}
           <DocInlineCode>className=&quot;dark&quot;</DocInlineCode> on a wrapper (not

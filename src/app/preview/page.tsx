@@ -2,6 +2,8 @@ import dynamic from "next/dynamic"
 
 import { ShowcaseRouteSkeleton } from "@/components/showcase/showcase-route-skeleton"
 
+import { pageMetadata } from "@/lib/page-metadata"
+
 import type { Metadata } from "next"
 
 const PreviewShell = dynamic(
@@ -12,11 +14,12 @@ const PreviewShell = dynamic(
   { loading: () => <ShowcaseRouteSkeleton /> }
 )
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/preview",
   title: "Live Preview — Decathemes",
   description:
     "Preview nine demo pages across all 10 themes — landing, dashboard, CRM, analytics, AI chat, and more.",
-}
+})
 
 interface PageProps {
   searchParams: Promise<{ theme?: string }>

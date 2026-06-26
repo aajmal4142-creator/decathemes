@@ -8,6 +8,7 @@ import {
   DocOl,
   DocP,
   DocPre,
+  DocRouteLink,
   DocTable,
   DocUl,
 } from "@/components/docs/doc-elements"
@@ -63,6 +64,12 @@ const layoutTokenRows = [
   ["--spacing-unit", "Base spacing multiplier", "p-theme-4, gap-theme-6"],
   ["--spacing-1 … --spacing-16", "Named spacing steps", "theme-relative padding"],
 ]
+
+const providerStructureCode = [
+  '<NextThemesProvider attribute="class" defaultTheme="system" enableSystem>',
+  "  <ThemeIdManager>{/* three split contexts */}{children}</ThemeIdManager>",
+  "</NextThemesProvider>",
+].join("\n")
 
 export function ThemingPage() {
   return (
@@ -131,9 +138,7 @@ export function ThemingPage() {
   useThemeTweaks,    // radius / font overrides
   useThemeAutoCycle, // hero auto-cycle toggle
 } from "@/components/showcase/theme-provider"`}</DocPre>
-        <DocPre title="Provider structure (simplified)">{`<NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
-  <ThemeIdManager>{/* three split contexts */}{children}</ThemeIdManager>
-</NextThemesProvider>`}</DocPre>
+        <DocPre title="Provider structure (simplified)">{providerStructureCode}</DocPre>
         <DocP>
           Users can pick light, dark, or system via the theme switcher. The active theme
           id and color mode are persisted separately in{" "}
@@ -178,8 +183,8 @@ export function ThemingPage() {
             <DocInlineCode>--spacing-unit</DocInlineCode> for personality
           </li>
           <li>
-            Preview at <DocLink href="/preview">/preview</DocLink> with the theme
-            switcher or <DocInlineCode>?theme=&lt;id&gt;</DocInlineCode>
+            Preview at <DocRouteLink href="/preview" label="Live preview hub" /> with the
+            theme switcher or <DocInlineCode>?theme=&lt;id&gt;</DocInlineCode>
           </li>
         </DocOl>
         <DocCallout variant="tip">

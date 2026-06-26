@@ -8,6 +8,7 @@ import {
   DocOl,
   DocP,
   DocPre,
+  DocRouteLink,
   DocUl,
 } from "@/components/docs/doc-elements"
 import { Badge } from "@/components/ui/badge"
@@ -109,8 +110,8 @@ export function AddingThemePage() {
             Run <DocInlineCode>npm run dev</DocInlineCode>
           </li>
           <li>
-            Open <DocLink href="/preview">/preview</DocLink> and select your theme from
-            the switcher (⌘K)
+            Open the <DocRouteLink href="/preview" label="live preview hub" /> and select
+            your theme from the switcher (⌘K)
           </li>
           <li>Toggle light and dark — both blocks must look intentional</li>
           <li>Check sidebar blocks, charts, and forms for contrast issues</li>

@@ -7,6 +7,7 @@ import {
   DocOl,
   DocP,
   DocPre,
+  DocRouteLink,
   DocUl,
 } from "@/components/docs/doc-elements"
 import { Badge } from "@/components/ui/badge"
@@ -20,6 +21,14 @@ export const blocksToc: DocTocItem[] = [
   { id: "categories", title: "Block categories", level: 2 },
   { id: "compose-pages", title: "Compose full pages", level: 2 },
 ]
+
+const copiedSnippetCode = [
+  'import { HeroCentered } from "@/components/blocks/marketing/hero"',
+  "",
+  "export default function Page() {",
+  "  return <HeroCentered />",
+  "}",
+].join("\n")
 
 export function BlocksPage() {
   return (
@@ -54,10 +63,10 @@ export function BlocksPage() {
       <section className="space-y-4">
         <DocH2 id="browse">Browse the library</DocH2>
         <DocP>
-          Open <DocLink href="/blocks">/blocks</DocLink> to preview every block with the
-          live theme switcher. Filter by category, search by name, or press ⌘F to jump.
-          Each card has a <strong>Copy code</strong> button that copies an import
-          snippet.
+          Open the <DocRouteLink href="/blocks" label="block library" /> to preview every
+          block with the live theme switcher. Filter by category, search by name, or press
+          ⌘F to jump. Each card has a <strong>Copy code</strong> button that copies an
+          import snippet.
         </DocP>
       </section>
 
@@ -72,11 +81,7 @@ export function BlocksPage() {
           <li>Paste into your page file</li>
           <li>Adjust copy, links, and images</li>
         </DocOl>
-        <DocPre title="Copied snippet">{`import { HeroCentered } from "@/components/blocks/marketing/hero"
-
-export default function Page() {
-  return <HeroCentered />
-}`}</DocPre>
+        <DocPre title="Copied snippet">{copiedSnippetCode}</DocPre>
         <DocP>
           For multiple blocks on one page, import each and stack them — see{" "}
           <DocInlineCode>src/components/demo/pages/landing-demo.tsx</DocInlineCode> for
@@ -153,8 +158,9 @@ export default function Page() {
         <DocPre>{`NavbarWithCta → HeroGradient → LogoCloud → FeatureGridBento
 → PricingThreeTier → TestimonialCards → FaqAccordion → CtaCentered → FooterColumns`}</DocPre>
         <DocP>
-          View the result at <DocLink href="/preview/landing">/preview/landing</DocLink>{" "}
-          or read the source to replicate in your own routes.
+          View the result at{" "}
+          <DocRouteLink href="/preview/landing" label="Landing demo" /> or read the
+          source to replicate in your own routes.
         </DocP>
       </section>
     </article>

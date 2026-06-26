@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-
 import dynamic from "next/dynamic"
 import Link from "next/link"
 
@@ -20,7 +19,6 @@ import {
   SmartphoneIcon,
   SparklesIcon,
   WandSparklesIcon,
-  XIcon,
   ZapIcon,
 } from "lucide-react"
 
@@ -58,15 +56,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { siteConfig } from "@/lib/site-config"
+import { codecanyonLicenseList } from "@/lib/pricing"
 import { cn } from "@/lib/utils"
 
-const ThemeSwitchMedia = dynamic(
-  () =>
-    import("@/components/marketing/theme-switch-media").then((m) => ({
-      default: m.ThemeSwitchMedia,
-    })),
-  { loading: () => <MarketingSectionSkeleton /> }
-)
+const PURCHASE_URL = siteConfig.purchaseUrl
 
 const ThemeGallerySection = dynamic(
   () =>
@@ -91,8 +84,6 @@ const LazyNewsletterInline = dynamic(
     })),
   { loading: () => <MarketingSectionSkeleton /> }
 )
-
-const PURCHASE_URL = siteConfig.purchaseUrl
 
 const features = [
   {
@@ -196,28 +187,46 @@ const comparisonRows = [
     generic: "Limited",
     decathemes: "62 blocks",
   },
+] as const
+
+const shipAudiences = [
+  {
+    icon: CodeIcon,
+    title: "Developers",
+    description:
+      "Copy blocks, switch themes with one attribute, and stay in strict TypeScript — no design handoff required.",
+  },
+  {
+    icon: LayersIcon,
+    title: "Agencies",
+    description:
+      "Pitch multiple brand directions from one codebase. Hand clients a polished shell the same week you start.",
+  },
+  {
+    icon: ZapIcon,
+    title: "Startups",
+    description:
+      "Launch with premium UI on day one — dark mode, responsive layouts, and nine demo pages included.",
+  },
 ]
 
+/*
 const testimonials = [
   {
-    quote:
-      "We swapped our entire marketing site and dashboard shell in an afternoon. Buyers kept asking which agency we hired.",
-    name: "Jordan Lee",
-    role: "Founder, Stackline",
-  },
-  {
-    quote:
-      "The theme switcher alone sold our stakeholders. Ten directions, one codebase — exactly what we needed for the pitch deck.",
-    name: "Priya Nair",
-    role: "Product Lead, Meridian SaaS",
-  },
-  {
-    quote:
-      "Finally a CodeCanyon UI kit that doesn't feel like CodeCanyon. Clean TypeScript, real demos, no Figma dependency.",
-    name: "Marcus Webb",
-    role: "Independent developer",
+    quote: "Replace with a real CodeCanyon review after launch.",
+    name: "Customer name",
+    role: "Role, Company",
   },
 ]
+
+function Testimonials() {
+  return (
+    <Section id="social-proof" border="top" background="muted" containerSize="marketing">
+      ...
+    </Section>
+  )
+}
+*/
 
 const faqs = [
   {
@@ -242,42 +251,11 @@ const faqs = [
   },
   {
     q: "Is this the live preview link for CodeCanyon?",
-    a: "Yes. This homepage and /preview are the official demo environment. Use Live Preview to explore all themes and demo pages before you buy.",
+    a: "Yes. This homepage and /preview are the official demo environment. Set your CodeCanyon Live Preview URL to /preview so buyers can explore all themes and demo pages before purchase.",
   },
 ]
 
-const licenses = [
-  {
-    name: "Regular License",
-    price: "$49",
-    description:
-      "For a single end product where end users are not charged (e.g. internal tools, free SaaS, client sites).",
-    features: [
-      "One end product",
-      "Free to end users",
-      "Lifetime updates",
-      "9 demo pages + 62 blocks",
-      "Standard support",
-    ],
-    cta: "Buy Regular License",
-    highlighted: false,
-  },
-  {
-    name: "Extended License",
-    price: "$249",
-    description:
-      "For a single end product that end users can be charged for (e.g. paid SaaS, marketplace, subscription app).",
-    features: [
-      "Everything in Regular",
-      "Charge end users",
-      "Commercial SaaS use",
-      "Lifetime updates",
-      "Priority support channel",
-    ],
-    cta: "Buy Extended License",
-    highlighted: true,
-  },
-]
+const licenses = codecanyonLicenseList
 
 function MarketingNav() {
   const [scrolled, setScrolled] = React.useState(false)
@@ -398,17 +376,38 @@ function ComparisonCell({
   positive?: boolean
 }) {
   if (typeof value === "boolean") {
-    return value ? (
-      <CheckIcon className="mx-auto size-5 text-primary" aria-label="Yes" />
-    ) : (
-      <XIcon className="mx-auto size-5 text-muted-foreground/50" aria-label="No" />
+    const label = value ? "Included" : "Not included"
+    return (
+      <span
+        className="inline-flex items-center justify-center gap-1"
+        role="img"
+        aria-label={label}
+      >
+        <span
+          className={cn(
+            "text-base font-semibold leading-none",
+            value ? "text-primary" : "text-muted-foreground"
+          )}
+          aria-hidden="true"
+        >
+          {value ? "✓" : "✗"}
+        </span>
+      </span>
     )
   }
 
-  return <span className={cn(positive && "font-medium text-foreground")}>{value}</span>
+  return (
+    <span className={cn("text-muted-foreground", positive && "font-medium text-foreground")}>
+      {value}
+    </span>
+  )
 }
 
-export function MarketingHome() {
+export function MarketingHome({
+  themeSwitchMedia,
+}: {
+  themeSwitchMedia?: React.ReactNode
+}) {
   return (
     <div className="relative flex flex-1 flex-col">
       <MarketingNav />
@@ -466,7 +465,7 @@ export function MarketingHome() {
         </Container>
       </section>
 
-      <ThemeSwitchMedia />
+      {themeSwitchMedia}
       <ThemeGallerySection />
       <WhoItsForSection />
 
@@ -591,7 +590,7 @@ export function MarketingHome() {
         </Reveal>
       </Section>
 
-      {/* Testimonials */}
+      {/* Built for how you ship */}
       <Section
         id="social-proof"
         border="top"
@@ -600,30 +599,30 @@ export function MarketingHome() {
       >
         <Reveal className="text-center">
           <Badge variant="outline" className="mb-4">
-            Social proof
+            Built for how you ship
           </Badge>
           <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-            Loved by builders
+            One kit, three workflows
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Placeholder testimonials — replace with real CodeCanyon reviews after
-            launch.
+            Decathemes is built for production teams — not filler quotes. Pick your
+            path and start from working code.
           </p>
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {testimonials.map((item, index) => (
-            <Reveal key={item.name} delay={index * 0.08}>
+          {shipAudiences.map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.08}>
               <MotionCard>
                 <Card className="h-full">
-                  <CardContent className="pt-6">
-                    <p className="text-sm leading-relaxed">
-                      &ldquo;{item.quote}&rdquo;
-                    </p>
-                    <div className="mt-6 border-t pt-4">
-                      <p className="text-sm font-medium">{item.name}</p>
-                      <p className="text-xs text-muted-foreground">{item.role}</p>
+                  <CardHeader>
+                    <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <item.icon className="size-5" />
                     </div>
-                  </CardContent>
+                    <CardTitle className="text-base">{item.title}</CardTitle>
+                    <CardDescription className="text-sm leading-relaxed">
+                      {item.description}
+                    </CardDescription>
+                  </CardHeader>
                 </Card>
               </MotionCard>
             </Reveal>
@@ -640,10 +639,10 @@ export function MarketingHome() {
         </Reveal>
         <Reveal delay={0.1} className="mt-10">
           <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq) => (
-              <AccordionItem key={faq.q} value={faq.q}>
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.q} value={`faq-${index}`}>
                 <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-muted-foreground leading-relaxed">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
@@ -663,8 +662,9 @@ export function MarketingHome() {
               Simple licensing
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Regular and Extended licenses match CodeCanyon tiers. One purchase,
-              lifetime updates.
+              Regular ({codecanyonLicenseList[0].price}) and Extended (
+              {codecanyonLicenseList[1].price}) licenses match CodeCanyon tiers. One
+              purchase, lifetime updates.
             </p>
           </Reveal>
           <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-8 lg:grid lg:grid-cols-2">

@@ -199,6 +199,24 @@ export function DocLink({
   )
 }
 
+/** In-app route with readable label plus monospace path. */
+export function DocRouteLink({
+  href,
+  label,
+}: {
+  href: string
+  label: string
+}) {
+  return (
+    <>
+      <DocLink href={href}>{label}</DocLink>{" "}
+      <span className="text-muted-foreground">
+        (<DocInlineCode>{href}</DocInlineCode>)
+      </span>
+    </>
+  )
+}
+
 export function DocTable({
   headers,
   rows,
