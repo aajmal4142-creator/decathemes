@@ -10,10 +10,15 @@ import { cn } from "@/lib/utils"
 function InputOTP({
   className,
   containerClassName,
+  value,
+  defaultValue,
   ...props
 }: React.ComponentProps<typeof OTPInput> & {
   containerClassName?: string
 }) {
+  const valueProps =
+    value !== undefined ? { value } : defaultValue !== undefined ? { defaultValue } : {}
+
   return (
     <OTPInput
       data-slot="input-otp"
@@ -23,6 +28,7 @@ function InputOTP({
       )}
       className={cn("disabled:cursor-not-allowed", className)}
       {...props}
+      {...valueProps}
     />
   )
 }

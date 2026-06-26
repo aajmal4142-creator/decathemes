@@ -19,6 +19,19 @@ export function pickDefined<T extends Record<string, unknown>>(
   return result
 }
 
+/** Controlled `value` wins over `defaultValue` — never pass both to DOM inputs. */
+export function pickValueProps<
+  T extends { value?: unknown; defaultValue?: unknown },
+>({ value, defaultValue, ...rest }: T) {
+  if (value !== undefined) {
+    return { ...rest, value }
+  }
+  if (defaultValue !== undefined) {
+    return { ...rest, defaultValue }
+  }
+  return rest
+}
+
 /** Returns the first element or a fallback when index access may be undefined. */
 export function atOr<T>(items: readonly T[], index: number, fallback: T): T {
   return items[index] ?? fallback

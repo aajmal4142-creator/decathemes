@@ -65,7 +65,7 @@ export function BlocksPage() {
         trailing={
           <Popover open={jumpOpen} onOpenChange={setJumpOpen}>
             <PopoverTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-1.5">
+              <Button variant="outline" size="sm" className="min-h-11 gap-1.5">
                 <SearchIcon className="size-3.5" />
                 Jump
                 <Badge variant="secondary" className="font-mono text-[10px]">
@@ -138,7 +138,7 @@ export function BlocksPage() {
                 key={category.id}
                 as="section"
                 id={`section-${category.id}`}
-                className="scroll-mt-44 space-y-8"
+                className="scroll-mt-[calc(var(--showcase-bar-height,4rem)+3.5rem)] space-y-8"
               >
                 <ShowcaseSectionHeader
                   eyebrow="Collection"

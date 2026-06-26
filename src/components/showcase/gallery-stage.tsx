@@ -21,7 +21,7 @@ export function GalleryStage({
       )}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 opacity-[0.12] dark:opacity-[0.35]"
         aria-hidden
         style={{
           backgroundImage:

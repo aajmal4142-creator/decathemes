@@ -83,9 +83,33 @@ export function ShowcaseTopBar({
   const pathname = usePathname()
   const resolvedActive = active ?? resolveActiveRoute(pathname ?? "")
   const { themeId, setThemeId, themes } = useThemeId()
+  const headerRef = React.useRef<HTMLElement>(null)
+
+  React.useEffect(() => {
+    const el = headerRef.current
+    if (!el) return
+
+    const syncBarHeight = () => {
+      document.documentElement.style.setProperty(
+        "--showcase-bar-height",
+        `${el.getBoundingClientRect().height}px`
+      )
+    }
+
+    syncBarHeight()
+    const observer = new ResizeObserver(syncBarHeight)
+    observer.observe(el)
+    window.addEventListener("resize", syncBarHeight)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("resize", syncBarHeight)
+    }
+  }, [])
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         "showcase-top-bar sticky-bar border-b bg-background/90 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 safe-area-x",
         className

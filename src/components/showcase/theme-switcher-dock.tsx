@@ -17,6 +17,7 @@ import { useThemeAutoCycle, useThemeId } from "@/components/showcase/theme-provi
 import { ThemeSwatchButton } from "@/components/showcase/theme-swatch"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { Switch } from "@/components/ui/switch"
 import { useMounted } from "@/hooks/use-mounted"
 import { useTransitionThemeClass } from "@/hooks/use-transition-theme"
@@ -32,6 +33,7 @@ export function ThemeSwitcherDock({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false)
   const [focusIndex, setFocusIndex] = React.useState(0)
   const panelRef = React.useRef<HTMLDivElement>(null)
+  const fabRef = React.useRef<HTMLDivElement>(null)
   const buttonRefs = React.useRef<Array<HTMLButtonElement | null>>([])
   const activeTheme = getThemeById(themeId)
 
@@ -98,10 +100,11 @@ export function ThemeSwitcherDock({ className }: { className?: string }) {
   React.useEffect(() => {
     if (!open) return
 
-    const onPointerDown = (event: MouseEvent) => {
-      if (!panelRef.current?.contains(event.target as Node)) {
-        setOpen(false)
-      }
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (panelRef.current?.contains(target)) return
+      if (fabRef.current?.contains(target)) return
+      setOpen(false)
     }
 
     window.addEventListener("pointerdown", onPointerDown)
@@ -110,36 +113,41 @@ export function ThemeSwitcherDock({ className }: { className?: string }) {
 
   if (!mounted) return null
 
+  const panelBounds = {
+    top: "max(calc(var(--showcase-bar-height, 4rem) + 0.5rem), var(--safe-top))",
+    bottom: "var(--showcase-chrome-bottom, calc(5.5rem + env(safe-area-inset-bottom, 0px)))",
+  } as const
+
   return (
-    <div
-      className={cn(
-        "fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-2",
-        className
-      )}
-    >
+    <>
       {open ? (
         <div
           ref={panelRef}
           role="listbox"
           aria-label="Choose theme"
+          data-theme-picker
+          data-theme-dock
+          style={panelBounds}
           className={cn(
-            "w-[min(100vw-2.5rem,22rem)] origin-bottom-right rounded-2xl border bg-popover/95 p-3 shadow-2xl ring-1 ring-border/60 backdrop-blur-xl",
+            "fixed isolate grid w-[min(100vw-2rem,24rem)] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-2xl border border-border/80 bg-popover shadow-2xl ring-1 ring-border/50",
+            "inset-x-4 sm:inset-x-auto sm:right-[max(1.25rem,env(safe-area-inset-right,0px))] sm:w-[min(calc(100vw-2.5rem),24rem)]",
             "animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-2 duration-200"
           )}
         >
-          <div className="mb-3 flex items-start justify-between gap-2">
-            <div>
-              <p className="flex items-center gap-1.5 text-sm font-semibold">
-                <PaletteIcon className="size-4 text-primary" />
+          <div className="relative z-10 flex shrink-0 items-start justify-between gap-3 border-b border-border/60 bg-popover px-3.5 pb-3 pt-3.5">
+            <div className="min-w-0">
+              <p className="flex items-center gap-1.5 font-heading text-sm font-semibold tracking-tight text-foreground">
+                <PaletteIcon className="size-4 shrink-0 text-primary" aria-hidden />
                 Theme studio
               </p>
-              <p className="text-[11px] text-muted-foreground">
-                Arrow keys · Enter to apply · circular wipe reveal
+              <p className="mt-0.5 text-[11px] leading-snug text-muted-foreground">
+                Pick a theme · arrow keys · circular wipe
               </p>
             </div>
             <Button
               variant="ghost"
               size="icon-sm"
+              className="shrink-0"
               onClick={() => setOpen(false)}
               aria-label="Close theme picker"
             >
@@ -147,31 +155,38 @@ export function ThemeSwitcherDock({ className }: { className?: string }) {
             </Button>
           </div>
 
-          <div className="mb-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {themes.map((theme, index) => (
-              <ThemeSwatchButton
-                key={theme.id}
-                theme={theme}
-                active={theme.id === themeId}
-                tabIndex={open && index === focusIndex ? 0 : -1}
-                buttonRef={(node) => {
-                  buttonRefs.current[index] = node
-                }}
-                onFocus={() => setFocusIndex(index)}
-                onSelect={(event) => {
-                  setThemeId(theme.id, getTransitionOriginFromEvent(event))
-                }}
-              />
-            ))}
-          </div>
+          <ScrollArea
+            className="theme-picker-scroll min-h-0 h-full overflow-hidden"
+            tabIndex={0}
+            aria-label="Theme list"
+            data-theme-picker-scroll
+          >
+            <div className="grid grid-cols-2 gap-2 px-3.5 py-3 min-[420px]:grid-cols-3">
+              {themes.map((theme, index) => (
+                <ThemeSwatchButton
+                  key={theme.id}
+                  theme={theme}
+                  active={theme.id === themeId}
+                  tabIndex={open && index === focusIndex ? 0 : -1}
+                  buttonRef={(node) => {
+                    buttonRefs.current[index] = node
+                  }}
+                  onFocus={() => setFocusIndex(index)}
+                  onSelect={(event) => {
+                    setThemeId(theme.id, getTransitionOriginFromEvent(event))
+                  }}
+                />
+              ))}
+            </div>
+          </ScrollArea>
 
-          <div className="space-y-2 rounded-xl border bg-muted/30 p-2.5">
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <WandSparklesIcon className="size-4 text-primary" />
-                <div>
+          <div className="shrink-0 space-y-2 border-t border-border/60 bg-popover px-3.5 py-3">
+            <div className="flex items-center justify-between gap-2 rounded-xl border border-border/60 bg-muted/40 p-2.5">
+              <div className="flex min-w-0 items-center gap-2">
+                <WandSparklesIcon className="size-4 shrink-0 text-primary" />
+                <div className="min-w-0">
                   <p className="text-xs font-medium">Surprise me</p>
-                  <p className="text-[10px] text-muted-foreground">
+                  <p className="truncate text-[10px] text-muted-foreground">
                     Auto-cycle all {themes.length} themes
                   </p>
                 </div>
@@ -183,7 +198,7 @@ export function ThemeSwitcherDock({ className }: { className?: string }) {
               />
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <ColorModeToggle variant="inline" iconSize="md" />
               <Button
                 variant={rtl ? "secondary" : "outline"}
@@ -198,43 +213,52 @@ export function ThemeSwitcherDock({ className }: { className?: string }) {
         </div>
       ) : null}
 
-      <Button
-        size="lg"
+      <div
+        ref={fabRef}
+        data-theme-dock
         className={cn(
-          "group relative h-14 gap-2 rounded-full border-2 border-background/80 px-4 shadow-2xl",
-          "bg-card/90 backdrop-blur-xl hover:shadow-primary/20",
-          autoCycle && "ring-2 ring-primary/50 ring-offset-2 ring-offset-background"
+          "fixed bottom-[max(1.25rem,var(--safe-bottom))] right-[max(1.25rem,var(--safe-right))]",
+          className
         )}
-        onClick={() => setOpen((value) => !value)}
-        aria-expanded={open}
-        aria-haspopup="listbox"
       >
-        <span
-          className="absolute inset-0 rounded-full opacity-40"
-          style={{ background: activeTheme?.previewGradient }}
-          aria-hidden
-        />
-        <span
-          className="relative size-8 shrink-0 rounded-full border-2 border-background shadow-md"
-          style={{ background: activeTheme?.previewGradient }}
-        />
-        <span className="relative hidden min-w-0 text-left sm:block">
-          <span className="block truncate text-sm font-semibold leading-none">
-            {activeTheme?.name ?? "Theme"}
+        <Button
+          size="lg"
+          className={cn(
+            "group relative h-14 gap-2 rounded-full border-2 border-background/80 px-4 shadow-2xl",
+            "bg-card/90 backdrop-blur-xl hover:shadow-primary/20",
+            autoCycle && "ring-2 ring-primary/50 ring-offset-2 ring-offset-background"
+          )}
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-haspopup="listbox"
+        >
+          <span
+            className="absolute inset-0 rounded-full opacity-40"
+            style={{ background: activeTheme?.previewGradient }}
+            aria-hidden
+          />
+          <span
+            className="relative size-8 shrink-0 rounded-full border-2 border-background shadow-md"
+            style={{ background: activeTheme?.previewGradient }}
+          />
+          <span className="relative hidden min-w-0 text-left sm:block">
+            <span className="block truncate text-sm font-semibold leading-none">
+              {activeTheme?.name ?? "Theme"}
+            </span>
+            <span className="mt-0.5 block text-[10px] text-muted-foreground">
+              {autoCycle ? "Auto-cycling…" : "Tap to switch"}
+            </span>
           </span>
-          <span className="mt-0.5 block text-[10px] text-muted-foreground">
-            {autoCycle ? "Auto-cycling…" : "Tap to switch"}
-          </span>
-        </span>
-        {autoCycle ? (
-          <SparklesIcon className="relative size-4 shrink-0 text-primary animate-pulse" />
-        ) : open ? (
-          <ChevronDownIcon className="relative size-4 shrink-0" />
-        ) : (
-          <ChevronUpIcon className="relative size-4 shrink-0" />
-        )}
-      </Button>
-    </div>
+          {autoCycle ? (
+            <SparklesIcon className="relative size-4 shrink-0 text-primary animate-pulse" />
+          ) : open ? (
+            <ChevronDownIcon className="relative size-4 shrink-0" />
+          ) : (
+            <ChevronUpIcon className="relative size-4 shrink-0" />
+          )}
+        </Button>
+      </div>
+    </>
   )
 }
 

@@ -20,16 +20,6 @@ export const themes: ThemeDefinition[] = [
     previewGradient: "linear-gradient(135deg, #fafafa 0%, #e5e5e5 50%, #171717 100%)",
   },
   {
-    id: "brutalist",
-    name: "Brutalist",
-    description:
-      "Raw, loud, and unapologetic. Hard borders, offset shadows, zero radius.",
-    tags: ["portfolio", "agency", "creative"],
-    vibes: ["bold", "raw", "confrontational", "graphic"],
-    previewColor: "#000000",
-    previewGradient: "linear-gradient(135deg, #fef08a 0%, #000000 50%, #ffffff 100%)",
-  },
-  {
     id: "glass",
     name: "Glass",
     description:
@@ -47,6 +37,16 @@ export const themes: ThemeDefinition[] = [
     vibes: ["electric", "futuristic", "nocturnal", "synthwave"],
     previewColor: "#00f5ff",
     previewGradient: "linear-gradient(135deg, #0a0a1a 0%, #00f5ff 50%, #ff00aa 100%)",
+  },
+  {
+    id: "luxury",
+    name: "Luxury",
+    description:
+      "Elegant black and gold. High contrast, thin serif headings, premium spacing.",
+    tags: ["fashion", "hospitality", "premium"],
+    vibes: ["opulent", "exclusive", "timeless", "refined"],
+    previewColor: "#c9a227",
+    previewGradient: "linear-gradient(135deg, #1a1a1a 0%, #c9a227 50%, #f5f0e1 100%)",
   },
   {
     id: "corporate",
@@ -78,14 +78,14 @@ export const themes: ThemeDefinition[] = [
     previewGradient: "linear-gradient(135deg, #fce7f3 0%, #ec4899 40%, #a5f3fc 100%)",
   },
   {
-    id: "luxury",
-    name: "Luxury",
+    id: "brutalist",
+    name: "Brutalist",
     description:
-      "Elegant black and gold. High contrast, thin serif headings, premium spacing.",
-    tags: ["fashion", "hospitality", "premium"],
-    vibes: ["opulent", "exclusive", "timeless", "refined"],
-    previewColor: "#c9a227",
-    previewGradient: "linear-gradient(135deg, #1a1a1a 0%, #c9a227 50%, #f5f0e1 100%)",
+      "Raw, loud, and unapologetic. Hard borders, offset shadows, zero radius.",
+    tags: ["portfolio", "agency", "creative"],
+    vibes: ["bold", "raw", "confrontational", "graphic"],
+    previewColor: "#000000",
+    previewGradient: "linear-gradient(135deg, #fef08a 0%, #000000 50%, #ffffff 100%)",
   },
   {
     id: "retro",

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
+import { pickValueProps } from "@/lib/optional-props"
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -132,7 +133,12 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
-function InputGroupInput({ className, ...props }: React.ComponentProps<"input">) {
+function InputGroupInput({
+  className,
+  value,
+  defaultValue,
+  ...props
+}: React.ComponentProps<"input">) {
   return (
     <Input
       data-slot="input-group-control"
@@ -140,12 +146,17 @@ function InputGroupInput({ className, ...props }: React.ComponentProps<"input">)
         "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent",
         className
       )}
-      {...props}
+      {...pickValueProps({ ...props, value, defaultValue })}
     />
   )
 }
 
-function InputGroupTextarea({ className, ...props }: React.ComponentProps<"textarea">) {
+function InputGroupTextarea({
+  className,
+  value,
+  defaultValue,
+  ...props
+}: React.ComponentProps<"textarea">) {
   return (
     <Textarea
       data-slot="input-group-control"
@@ -153,7 +164,7 @@ function InputGroupTextarea({ className, ...props }: React.ComponentProps<"texta
         "flex-1 resize-none rounded-none border-0 bg-transparent py-3 shadow-none focus-visible:ring-0 dark:bg-transparent",
         className
       )}
-      {...props}
+      {...pickValueProps({ ...props, value, defaultValue })}
     />
   )
 }

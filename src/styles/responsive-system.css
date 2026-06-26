@@ -27,6 +27,7 @@
   --safe-right: env(safe-area-inset-right, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
+  --showcase-chrome-bottom: calc(5.5rem + var(--safe-bottom));
 }
 
 /* Container query breakpoints (component-level, not viewport) */
@@ -157,12 +158,44 @@
     padding-bottom: calc(0.75rem + var(--safe-bottom));
   }
 
-  /* Sticky/fixed bars with notch support */
+  /* Sticky/fixed bars with notch support — above dock, below portaled menus */
   .sticky-bar {
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 52;
     padding-top: var(--safe-top);
+  }
+
+  /* Theme dock sits below sticky chrome */
+  [data-theme-dock] {
+    z-index: 40;
+  }
+
+  /* Portaled menus above sticky bars */
+  [data-slot="dropdown-menu-content"],
+  [data-slot="select-content"],
+  [data-slot="popover-content"],
+  [data-slot="dialog-content"],
+  [data-slot="sheet-content"] {
+    z-index: 55;
+  }
+
+  /* Pointer on interactive controls */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  label[for],
+  select,
+  [data-slot="switch"],
+  [data-slot="tabs-trigger"],
+  [data-slot="command-item"],
+  [role="option"] {
+    cursor: pointer;
+  }
+
+  /* Light mode — keep muted text readable on pale themes */
+  html:not(.dark) .text-muted-foreground {
+    color: color-mix(in oklch, var(--muted-foreground) 65%, var(--foreground));
   }
 
   /* Scrollable tabs — never clip on mobile */
@@ -244,10 +277,76 @@
     background: var(--muted);
   }
 
-  /* Showcase page overflow guard */
+  /* Showcase page overflow guard + room for floating theme dock */
   .showcase-page {
     overflow-x: clip;
     max-width: 100%;
     min-width: 0;
+    --showcase-bar-height: 4rem;
+    --showcase-chrome-bottom: calc(5.5rem + var(--safe-bottom));
+    padding-bottom: var(--showcase-chrome-bottom);
+  }
+
+  /* Theme picker dock — thin custom scrollbar, no native chrome */
+  .theme-picker-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, var(--muted-foreground) 45%, transparent)
+      transparent;
+  }
+
+  .theme-picker-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .theme-picker-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: 2px;
+  }
+
+  .theme-picker-scroll::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
+  }
+
+  .theme-picker-scroll::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklch, var(--muted-foreground) 60%, transparent);
+  }
+
+  /* Swatch previews must not inherit page-level theme pseudo-layers */
+  [data-theme-picker] [data-theme]::before,
+  [data-theme-picker] [data-theme]::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  [data-theme-picker] [data-slot="scroll-area-scrollbar"] {
+    width: 4px;
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  [data-theme-picker] [data-slot="scroll-area-thumb"] {
+    border-radius: 9999px;
+    background: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
+  }
+
+  [data-theme-picker] [data-slot="scroll-area-thumb"]:hover {
+    background: color-mix(in oklch, var(--muted-foreground) 60%, transparent);
+  }
+
+  /* Gallery demos — keep viewport-fixed primitives inside the stage */
+  [data-gallery-stage] [data-slot="sidebar-container"] {
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+
+  [data-gallery-stage] [data-slot="sidebar-wrapper"] {
+    min-height: 0 !important;
+    height: 100% !important;
   }
 }

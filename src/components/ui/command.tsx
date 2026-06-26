@@ -13,6 +13,7 @@ import {
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-dialog"
 import { cn } from "@/lib/utils"
+import { pickValueProps } from "@/lib/optional-props"
 
 function Command({
   className,
@@ -63,6 +64,8 @@ function CommandDialog({
 
 function CommandInput({
   className,
+  value,
+  defaultValue,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
@@ -77,7 +80,7 @@ function CommandInput({
           "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
-        {...props}
+        {...pickValueProps({ ...props, value, defaultValue })}
       />
     </div>
   )

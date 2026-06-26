@@ -281,7 +281,7 @@ function MarketingNav() {
   return (
     <header
       className={cn(
-        "sticky-bar z-50 transition-all duration-300 safe-area-x",
+        "sticky-bar transition-all duration-300 safe-area-x",
         scrolled
           ? "border-b bg-background/85 shadow-sm backdrop-blur-xl"
           : "bg-transparent"

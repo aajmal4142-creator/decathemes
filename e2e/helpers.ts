@@ -5,13 +5,13 @@ import { expect, type Page } from "@playwright/test"
 /** All registered `data-theme` ids — keep in sync with `src/themes/_registry.ts`. */
 export const THEME_IDS = [
   "minimal",
-  "brutalist",
   "glass",
   "neon",
+  "luxury",
   "corporate",
   "editorial",
   "playful",
-  "luxury",
+  "brutalist",
   "retro",
   "organic",
 ] as const

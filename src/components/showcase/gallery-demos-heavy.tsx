@@ -40,7 +40,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { pickDefined } from "@/lib/optional-props"
 
@@ -182,34 +181,35 @@ export function CarouselDemo() {
 
 export function SidebarDemo() {
   return (
-    <SidebarProvider className="min-h-[220px] w-full max-w-md rounded-lg border">
-      <Sidebar collapsible="icon">
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Menu</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <HomeIcon />
-                    <span>Home</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <SettingsIcon />
-                    <span>Settings</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-      </Sidebar>
-      <main className="flex flex-1 flex-col gap-theme-2 p-theme-4">
-        <SidebarTrigger />
-        <p className="text-sm text-muted-foreground">Sidebar demo content.</p>
-      </main>
+    <SidebarProvider className="min-h-[220px] w-full max-w-md overflow-hidden rounded-lg border">
+      <div className="relative flex min-h-[220px] w-full">
+        <Sidebar collapsible="none" className="shrink-0 border-r">
+          <SidebarContent>
+            <SidebarGroup>
+              <SidebarGroupLabel>Menu</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <HomeIcon />
+                      <span>Home</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <SettingsIcon />
+                      <span>Settings</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+        <main className="flex flex-1 flex-col gap-theme-2 p-theme-4">
+          <p className="text-sm text-muted-foreground">Sidebar demo content.</p>
+        </main>
+      </div>
     </SidebarProvider>
   )
 }

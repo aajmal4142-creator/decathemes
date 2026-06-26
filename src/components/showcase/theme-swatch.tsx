@@ -58,6 +58,7 @@ export const ThemeSwatchButton = React.memo(function ThemeSwatchButton({
       ref={buttonRef}
       type="button"
       role="option"
+      data-theme-swatch
       aria-selected={active}
       aria-label={`${theme.name} theme`}
       tabIndex={tabIndex}

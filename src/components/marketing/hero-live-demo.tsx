@@ -1,37 +1,22 @@
 "use client"
 
-import * as React from "react"
-
 import { SparklesIcon } from "lucide-react"
 
 import { HeroMiniApp } from "@/components/marketing/hero-mini-app"
-import {
-  useActiveThemeId,
-  useThemeAutoCycle,
-} from "@/components/showcase/theme-provider"
+import { useActiveThemeId } from "@/components/showcase/theme-provider"
 import { Badge } from "@/components/ui/badge"
 import { useTransitionThemeClass } from "@/hooks/use-transition-theme"
-import { scheduleWhenReady } from "@/lib/defer-idle"
 import { getThemePersonality } from "@/lib/theme-personality"
 import { cn } from "@/lib/utils"
 import { getThemeById } from "@/themes/_registry"
 
-/** Hero frame with auto-cycling themes and POLISH 2 view-transition wipes. */
+/** Hero frame with live theme preview and POLISH 2 view-transition wipes. */
 export function HeroLiveDemo({ className }: { className?: string }) {
   const themeId = useActiveThemeId()
-  const { setAutoCycle } = useThemeAutoCycle()
   const theme = getThemeById(themeId)
   const personality = getThemePersonality(themeId)
 
   useTransitionThemeClass()
-
-  React.useEffect(() => {
-    const stop = scheduleWhenReady(() => setAutoCycle(true))
-    return () => {
-      stop()
-      setAutoCycle(false)
-    }
-  }, [setAutoCycle])
 
   return (
     <div
@@ -53,7 +38,7 @@ export function HeroLiveDemo({ className }: { className?: string }) {
             className="ml-auto hidden gap-1 font-mono text-[10px] sm:inline-flex"
           >
             <SparklesIcon className="size-3 text-primary" />
-            Auto-cycle
+            Live preview
           </Badge>
         </div>
 
@@ -79,7 +64,7 @@ export function HeroLiveDemo({ className }: { className?: string }) {
       </div>
 
       <p className="mt-3 text-center text-[11px] text-muted-foreground sm:text-xs">
-        Themes cycle every 4s with a circular view-transition wipe
+        Use Surprise me below to auto-cycle themes with a circular view-transition wipe
       </p>
     </div>
   )

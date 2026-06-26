@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { Slider as SliderPrimitive } from "radix-ui"
 
-import { pickDefined } from "@/lib/optional-props"
+import { pickValueProps } from "@/lib/optional-props"
 import { cn } from "@/lib/utils"
 
 function Slider({
@@ -28,7 +28,7 @@ function Slider({
   return (
     <SliderPrimitive.Root
       data-slot="slider"
-      {...pickDefined({ defaultValue, value })}
+      {...pickValueProps({ defaultValue, value })}
       min={min}
       max={max}
       className={cn(
