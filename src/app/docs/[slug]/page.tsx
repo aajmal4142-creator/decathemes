@@ -28,7 +28,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = getDocPage(slug)
 
   if (!page) {
-    return { title: "Docs — Decathemes" }
+    return pageMetadata({
+      path: "/docs",
+      title: "Documentation Not Found",
+      description: "The requested Decathemes documentation page could not be found.",
+    })
   }
 
   return pageMetadata({

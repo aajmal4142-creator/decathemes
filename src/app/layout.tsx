@@ -2,6 +2,7 @@ import { Analytics } from "@/components/showcase/analytics"
 import { AppProviders } from "@/components/showcase/app-providers"
 import { coreFontVariables } from "@/lib/fonts-core"
 import { siteConfig } from "@/lib/site-config"
+import { ogImage } from "@/lib/page-metadata"
 import { THEME_ID_STORAGE_KEY } from "@/lib/theme"
 import { defaultThemeId } from "@/themes/_registry"
 
@@ -47,20 +48,26 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
+    images: [ogImage.url],
   },
   robots: {
     index: true,
     follow: true,
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/apple-touch-icon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
   },
+  manifest: "/manifest.webmanifest",
 }
 
 export default function RootLayout({

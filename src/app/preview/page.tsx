@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic"
 
 import { ShowcaseRouteSkeleton } from "@/components/showcase/showcase-route-skeleton"
-
 import { pageMetadata } from "@/lib/page-metadata"
 
 import type { Metadata } from "next"
@@ -16,9 +15,9 @@ const PreviewShell = dynamic(
 
 export const metadata: Metadata = pageMetadata({
   path: "/preview",
-  title: "Live Preview — Decathemes",
+  title: "Live Preview Hub — 9 Demo Pages Across 10 Themes",
   description:
-    "Preview nine demo pages across all 10 themes — landing, dashboard, CRM, analytics, AI chat, and more.",
+    "Explore nine full demo pages with live theme switching, viewport presets, and dark mode. The official CodeCanyon interactive preview for Decathemes.",
 })
 
 interface PageProps {

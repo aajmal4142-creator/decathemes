@@ -7,6 +7,7 @@ import {
   type DemoPageId,
 } from "@/components/demo/preview-registry"
 import { ShowcaseRouteSkeleton } from "@/components/showcase/showcase-route-skeleton"
+import { pageMetadata } from "@/lib/page-metadata"
 
 import type { Metadata } from "next"
 
@@ -50,10 +51,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const page = getDemoPage(pageId)
 
-  return {
-    title: `${page.label} — Live Preview — Decathemes`,
-    description: page.description,
-  }
+  return pageMetadata({
+    path: page.path,
+    title: `${page.label} Demo — Live Preview`,
+    description: `${page.description} Preview this template across all 10 Decathemes visual identities with live theme switching.`,
+  })
 }
 
 export default async function DemoPageRoute({ params, searchParams }: PageProps) {

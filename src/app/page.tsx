@@ -1,10 +1,9 @@
 import dynamic from "next/dynamic"
 
+import { HomeJsonLd } from "@/components/seo/home-json-ld"
 import { ThemeSwitchMedia } from "@/components/marketing/theme-switch-media"
 import { Skeleton } from "@/components/ui/skeleton"
-
 import { pageMetadata } from "@/lib/page-metadata"
-import { siteConfig } from "@/lib/site-config"
 
 import type { Metadata } from "next"
 
@@ -28,21 +27,21 @@ const MarketingHome = dynamic(
   }
 )
 
-export const metadata: Metadata = {
-  ...pageMetadata({
-    path: "/",
-    title: "Decathemes — 10 Premium UI Themes for Next.js & shadcn/ui",
-    description:
-      "Production-ready themes, 50+ components, 62 copy-paste blocks, and 9 full demo pages. The CodeCanyon live preview for serious Next.js teams.",
-  }),
-  openGraph: {
-    title: "Decathemes — 10 Premium UI Themes",
-    description:
-      "Swap one attribute, transform your entire product. Live preview all 10 themes instantly.",
-    url: siteConfig.url,
-  },
-}
+export const metadata: Metadata = pageMetadata({
+  path: "/",
+  title: "Decathemes — 10 Premium UI Themes for Next.js & shadcn/ui",
+  description:
+    "Production-ready themes, 50+ components, 62 copy-paste blocks, and 9 full demo pages. The CodeCanyon live preview for serious Next.js teams.",
+  openGraphTitle: "Decathemes — 10 Premium UI Themes",
+  openGraphDescription:
+    "Swap one attribute, transform your entire product. Live preview all 10 themes instantly.",
+})
 
 export default function Home() {
-  return <MarketingHome themeSwitchMedia={<ThemeSwitchMedia />} />
+  return (
+    <>
+      <HomeJsonLd />
+      <MarketingHome themeSwitchMedia={<ThemeSwitchMedia />} />
+    </>
+  )
 }
